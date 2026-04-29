@@ -2513,10 +2513,13 @@ NSSU_DATA_END
             const match = KANBAN_LOOKUP[val];
             if (index === 0) {
               // First line: full autofill — Part Number, Part Name, Supplier
+              // Always apply lookup values on fresh form; only skip if field was manually edited
+              const kanbanChanged = state.kanbanEntries[0].kanban !== (state._lastLookupKanban || '');
+              state._lastLookupKanban = state.kanbanEntries[0].kanban;
               let changed = false;
-              if (!state.partNumber && match.partNumber) { state.partNumber = match.partNumber; state.kanbanEntries[0].partNumber = match.partNumber; changed = true; }
-              if (!state.partName   && match.partName)   { state.partName = match.partName; changed = true; }
-              if (!state.supplier   && match.supplier)   { state.supplier = match.supplier; changed = true; }
+              if (match.partNumber) { state.partNumber = match.partNumber; state.kanbanEntries[0].partNumber = match.partNumber; changed = true; }
+              if (match.partName)   { state.partName = match.partName; changed = true; }
+              if (match.supplier)   { state.supplier = match.supplier; changed = true; }
               if (changed) { showKanbanLookupToast(match); render(); return; }
             } else {
               // Additional lines: only fill the part number on this line
@@ -3587,6 +3590,7 @@ NSSU_DATA_END
       state.aiAttemptsUsed = 0;
       state.riSignedLock = false;
       state.kanbanEntries = [{ partNumber: '', kanban: '', fileName: '' }];
+      state._lastLookupKanban = '';
 
       if (typeof reviewState !== 'undefined') {
         Object.keys(reviewState).forEach(k => reviewState[k] = false);
@@ -4482,9 +4486,6 @@ NSSU_DATA_END
     console.assert(unitOptions().includes('MM') && unitOptions().includes('CM') && unitOptions().includes('IN'), 'unit options should exist');
     console.assert(certificationOptions.includes('Green Stickers') && certificationOptions.includes('Slash Kanban') && certificationOptions.includes('N/A'), 'certification options should exist');
 
-    renderRevisionList();
-    render();
-
     // ── Kanban lookup toast ───────────────────────────────────────────────────
     let toastTimer = null;
     function showKanbanLookupToast(match) {
@@ -4500,6 +4501,9 @@ NSSU_DATA_END
       clearTimeout(toastTimer);
       toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
     }
+
+    renderRevisionList();
+    render();
   </script>
 </body>
 </html>
