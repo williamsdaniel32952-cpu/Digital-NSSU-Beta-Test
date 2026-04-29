@@ -305,7 +305,7 @@
   <div id="postInitiateModal" class="modal">
     <div class="modal-card">
       <div style="font-weight:700; margin-bottom:10px;">NSSU initiated successfully.</div>
-      <div style="font-size:12px; margin-bottom:12px;">Save the PDF now for emailing. This draft exports Page 1A, Page 1B, Page 2, a combined Page 3 + Page 4 sheet, and a final signatures page while keeping the file email-friendly.</div>
+      <div style="font-size:12px; margin-bottom:12px;">Save the PDF now for emailing. This draft exports Page 1A, Page 1B, Page 2, Page 3 (and Page 4 if Rework is selected), and a final signatures page while keeping the file email-friendly.</div>
       <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
         <button class="btn" id="savePdfBtn" type="button">Save PDF</button>
         <button class="btn secondary" id="closePostInitiateBtn" type="button">Close</button>
@@ -1755,15 +1755,17 @@
       page34Container.appendChild(p3Title);
       page34Container.appendChild(document.querySelector('.preview').cloneNode(true));
 
-      const p4Title = document.createElement('div');
-      p4Title.className = 'panel-title';
-      p4Title.style.marginTop = '18px';
-      p4Title.textContent = 'Page 4 — Rework Steps Preview';
-      page34Container.appendChild(p4Title);
-      const page4PreviewClone = document.querySelectorAll('.preview')[1].cloneNode(true);
-      const internalControls = page4PreviewClone.querySelector('#aiSuggestWrap');
-      if (internalControls) internalControls.remove();
-      page34Container.appendChild(page4PreviewClone);
+      if (state.projectTypeRework) {
+        const p4Title = document.createElement('div');
+        p4Title.className = 'panel-title';
+        p4Title.style.marginTop = '18px';
+        p4Title.textContent = 'Page 4 — Rework Steps Preview';
+        page34Container.appendChild(p4Title);
+        const page4PreviewClone = document.querySelectorAll('.preview')[1].cloneNode(true);
+        const internalControls = page4PreviewClone.querySelector('#aiSuggestWrap');
+        if (internalControls) internalControls.remove();
+        page34Container.appendChild(page4PreviewClone);
+      }
 
       page5Container.style.padding = '24px';
       const sigTitle = document.createElement('div');
