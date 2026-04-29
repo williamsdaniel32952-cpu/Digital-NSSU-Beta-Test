@@ -1,7 +1,7 @@
 // sw.js — NSSU PWA Service Worker
 // Cache-first strategy: serves from cache when offline, updates in background when online.
 
-const CACHE_NAME = 'nssu-v3';
+const CACHE_NAME = 'nssu-v4';
 
 // All assets the app needs to function fully offline.
 const PRECACHE_URLS = [
@@ -13,6 +13,7 @@ const PRECACHE_URLS = [
   'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js',
   'https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js',
   'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js',
+  'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js',
   'https://cdn.jsdelivr.net/npm/@zxing/library@0.20.0/umd/index.min.js'
 ];
 
