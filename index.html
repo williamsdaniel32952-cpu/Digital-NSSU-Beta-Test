@@ -258,22 +258,49 @@
       <div>
         <div class="panel-title">Page 3 Work Instructions Preview</div>
         <div class="preview">
-          <div class="summary-box" id="summaryBox" contenteditable="true">We are inspecting for ____________.</div>
-          <div class="step-row"><div class="step-num">1</div><div class="step-box" id="step1Box" contenteditable="true">1.) Define where the parts are coming from and how they will be handled. This is known as a "Process Flow".</div></div>
-          <div class="step-row"><div class="step-num">2</div><div class="step-box" id="step2Box" contenteditable="true">2.) Define the "Focal Point" that will be used.</div></div>
-          <div class="step-row"><div class="step-num">3</div><div class="step-box" id="step3Box" contenteditable="true">3.) Define what conditions make a part "Good" and how to record "Good" parts onto the paperwork provided.</div></div>
-          <div class="step-row"><div class="step-num">4</div><div class="step-box" id="step4Box" contenteditable="true">4.) Define what conditions make a part "No-Good" and how to record "No-Good" parts onto the paperwork provided.</div></div>
+          <div>
+            <div class="summary-box" id="summaryBox" contenteditable="true">We are inspecting for ____________.</div>
+            <div style="text-align:left; margin-top:2px;"><button type="button" class="sig-clear" onclick="if(!state.riSignedLock){document.getElementById('summaryBox').textContent='';state.summaryBox='';}">Clear</button></div>
+          </div>
+          <div>
+            <div class="step-row"><div class="step-num">1</div><div class="step-box" id="step1Box" contenteditable="true">1.) Define where the parts are coming from and how they will be handled. This is known as a "Process Flow".</div></div>
+            <div style="text-align:left; margin-top:2px; padding-left:46px;"><button type="button" class="sig-clear" onclick="if(!state.riSignedLock){document.getElementById('step1Box').textContent='';state['step1Box']='';}" >Clear</button></div>
+          </div>
+          <div>
+            <div class="step-row"><div class="step-num">2</div><div class="step-box" id="step2Box" contenteditable="true">2.) Define the "Focal Point" that will be used.</div></div>
+            <div style="text-align:left; margin-top:2px; padding-left:46px;"><button type="button" class="sig-clear" onclick="if(!state.riSignedLock){document.getElementById('step2Box').textContent='';state['step2Box']='';}" >Clear</button></div>
+          </div>
+          <div>
+            <div class="step-row"><div class="step-num">3</div><div class="step-box" id="step3Box" contenteditable="true">3.) Define what conditions make a part "Good" and how to record "Good" parts onto the paperwork provided.</div></div>
+            <div style="text-align:left; margin-top:2px; padding-left:46px;"><button type="button" class="sig-clear" onclick="if(!state.riSignedLock){document.getElementById('step3Box').textContent='';state['step3Box']='';}" >Clear</button></div>
+          </div>
+          <div>
+            <div class="step-row"><div class="step-num">4</div><div class="step-box" id="step4Box" contenteditable="true">4.) Define what conditions make a part "No-Good" and how to record "No-Good" parts onto the paperwork provided.</div></div>
+            <div style="text-align:left; margin-top:2px; padding-left:46px;"><button type="button" class="sig-clear" onclick="if(!state.riSignedLock){document.getElementById('step4Box').textContent='';state['step4Box']='';}" >Clear</button></div>
+          </div>
           <div class="section-note">Key Points</div>
           <div class="step-box" id="keyPointsBox" contenteditable="true">* Review Pictures and Videos prior to inspection</div>
         </div>
 
         <div class="panel-title" style="margin-top:18px;">Page 4 — Rework Steps Preview</div>
         <div class="preview">
-          <div class="section-note" id="reworkNotice">When Rework is selected, blue text indicates an autofill suggestion that must be manually reviewed. Click into each blue field to confirm or replace the wording. Once clicked, the text turns black.</div>
-          <div class="step-row"><div class="step-num">1</div><div class="step-box suggestion" id="rework1Box" contenteditable="true">1. Define the step or steps in the rework process.</div></div>
-          <div class="step-row"><div class="step-num">2</div><div class="step-box suggestion" id="rework2Box" contenteditable="true">2. Instruct the inspector to re-inspect the part, to ensure the rework was successful.</div></div>
-          <div class="step-row"><div class="step-num">3</div><div class="step-box suggestion" id="rework3Box" contenteditable="true">3. Define how to record the data if the rework was successful.</div></div>
-          <div class="step-row"><div class="step-num">4</div><div class="step-box suggestion" id="rework4Box" contenteditable="true">4. Define how to record the data if the part cannot be reworked or becomes damaged.</div></div>
+          <div class="section-note" id="reworkNotice">When Rework or 100% Rework is selected, blue text indicates an autofill suggestion that must be manually reviewed. Click into each blue field to confirm or replace the wording. Once clicked, the text turns black.</div>
+          <div>
+            <div class="step-row"><div class="step-num">1</div><div class="step-box suggestion" id="rework1Box" contenteditable="true">1. Define the step or steps in the rework process.</div></div>
+            <div style="text-align:left; margin-top:2px; padding-left:46px;"><button type="button" class="sig-clear" onclick="if(!state.riSignedLock){document.getElementById('rework1Box').textContent='';state['rework1Box']='';}" >Clear</button></div>
+          </div>
+          <div>
+            <div class="step-row"><div class="step-num">2</div><div class="step-box suggestion" id="rework2Box" contenteditable="true">2. Instruct the inspector to re-inspect the part, to ensure the rework was successful.</div></div>
+            <div style="text-align:left; margin-top:2px; padding-left:46px;"><button type="button" class="sig-clear" onclick="if(!state.riSignedLock){document.getElementById('rework2Box').textContent='';state['rework2Box']='';}" >Clear</button></div>
+          </div>
+          <div>
+            <div class="step-row"><div class="step-num">3</div><div class="step-box suggestion" id="rework3Box" contenteditable="true">3. Define how to record the data if the rework was successful.</div></div>
+            <div style="text-align:left; margin-top:2px; padding-left:46px;"><button type="button" class="sig-clear" onclick="if(!state.riSignedLock){document.getElementById('rework3Box').textContent='';state['rework3Box']='';}" >Clear</button></div>
+          </div>
+          <div>
+            <div class="step-row"><div class="step-num">4</div><div class="step-box suggestion" id="rework4Box" contenteditable="true">4. Define how to record the data if the part cannot be reworked or becomes damaged.</div></div>
+            <div style="text-align:left; margin-top:2px; padding-left:46px;"><button type="button" class="sig-clear" onclick="if(!state.riSignedLock){document.getElementById('rework4Box').textContent='';state['rework4Box']='';}" >Clear</button></div>
+          </div>
           <div id="aiSuggestWrap" class="ai-suggest-wrap">
             <button class="btn secondary" id="aiSuggestBtn" type="button">Request AI Suggestion (Optional)</button>
             <button class="btn secondary" id="updateLibraryBtn" type="button">Update Rework Library</button>
@@ -379,7 +406,7 @@
       goodNoGoodYes: false, goodNoGoodNo: false, examplesLocated: '',
       kanbanEntries: [{ partNumber: '', kanban: '', fileName: '' }],
       commonDefect: '', defectOther: '', otherDefect: false,
-      projectTypeInspection: false, projectTypeRework: false,
+      projectTypeInspection: false, projectTypeRework: false, projectTypeFullRework: false,
       material: '', line: '', areaVehicle: '', interiorSelection: '',
       areaTypeLine: false, areaTypeLineside: false, areaTypePick: false, areaTypeArea: false,
       focalStandard: '', focalUseStandard: false, focalUseOther: false, focalOther: '',
@@ -393,7 +420,7 @@
       safetyPPE: ['Safety Glasses','Bump Cap','Safety Shoes','Orange Vest','Rubber Palm Gloves'], safetyOtherPPE: '',
       sdsNeededAns: '', sdsChemicalType: '', chemNeededAns: '', chemApprovedAns: '', chemContact: '', sortApprovedAns: '', sortContact: '', blueXAns: '', over27Ans: '',
       safetyHazardsList: [], mutilationConcerns: [], layoutNote: '', commentsStep5: ['', '', '', '', '', ''],
-      reworkTool: '', reworkToolsRequired: '', reworkToolsRequiredYes: false, reworkToolsRequiredNo: false,
+      reworkTool: '', reworkToolOther: '', reworkToolOtherSelected: false,
       aiEligible: false,
       aiAttemptsUsed: 0,
       manualPage3Mode: false,
@@ -407,13 +434,13 @@
 
     const defectLibrary = [
       'Appearance Defect','Burr','Chip','Crack','Cut','Damage','Debris','Dent',
-      'Dirt / Contamination','Excess Flash','Excess Material','Flash',
-      'Foreign Material','Mark','Mark / Streak','Misassembled','Miscut',
+      'Excess Flash','Excess Material','Flash',
+      'Foreign Material','Incorrect Label','Mark','Misassembled','Miscut',
       'Missing / Not Seated','Missing Clip / Not Seated','Missing Sub-Component',
-      'Misstamped','NG Dimension','Obstruction','Residue','Rough Operation','Rust',
+      'Misstamped','NG Dimension','Obstruction','Residue','Rust',
       'Scratch','Short Shot','Stiff Operation','Streak','Surface Marks',
       'Thread Contamination','Thread Issue','Weld Splatter','Workability / Tight',
-      'Wrong Kanban / Incorrect Label',
+      'Wrong Kanban',
       'Mixed Parts','Mixed Kanban'
     ];
     const lineOptions = ['','Trim 1','Trim 2','Final 1','Final 2','Final 3','Water Leak','Sales Line','Engine','Chassis','Body Weld','Paint','ED'];
@@ -443,10 +470,10 @@
     const documentMarkOptions = ['Okay','Scrap','Rework'];
     const pluralMap = {
       'Appearance Defect':'Appearance Defects','Burr':'Burrs','Chip':'Chips',
-      'Crack':'Cracks','Cut':'Cuts','Damage':'Damage','Dent':'Dents',
-      'Debris':'Debris','Dent':'Dents','Dirt / Contamination':'Dirt and Contamination',
-      'Excess Flash':'Excess Flash','Excess Material':'Excess Material',
-      'Flash':'Flash','Foreign Material':'Foreign Material',
+      'Crack':'Cracks','Cut':'Cuts','Damage':'Damage','Debris':'Debris','Dent':'Dents',
+      'Dirt / Contamination':'Dirt and Contamination',
+      'Excess Flash':'Excess Flash','Excess Material':'Excess Material','Flash':'Flash',
+      'Foreign Material':'Foreign Material','Incorrect Label':'Incorrect Labels',
       'Mark':'Marks','Mark / Streak':'Marks and Streaks',
       'Misassembled':'Misassembled Parts','Miscut':'Miscuts',
       'Missing / Not Seated':'Missing and Unseated Parts',
@@ -458,7 +485,7 @@
       'Streak':'Streaks','Surface Marks':'Surface Marks',
       'Thread Contamination':'Thread Contamination','Thread Issue':'Thread Issues',
       'Weld Splatter':'Weld Splatter','Workability / Tight':'Workability Issues',
-      'Wrong Kanban / Incorrect Label':'Wrong Kanbans and Incorrect Labels',
+      'Wrong Kanban':'Wrong Kanbans','Wrong Kanban / Incorrect Label':'Wrong Kanbans and Incorrect Labels',
       'Mixed Parts':'Mixed Parts','Mixed Kanban':'Mixed Kanban'
     };
 
@@ -470,27 +497,29 @@
     "file": "Using your file, apply a light to moderate pressure to the appearance defect until it is removed from the suspect area.",
     "deburring tool": "Using a Deburring Tool, apply light to moderate pressure to the appearance defect and roll the deburring tool away from you. Repeat until the appearance defect is removed.",
     "hook pick": "Using a Hook Pick, apply light to moderate pressure to lift away the appearance defect.",
-    "microfiber towel": "Using your Microfiber Towel, apply a light to moderate pressure, in small circles until the appearance defect until it is removed from the suspect area.",
-    "alcohol": "Using the aclohol provided with an applicator, apply a light to moderate pressure, in small circles until the appearance defect until it is removed from the suspect area.",
-    "alcohol wipes": "Using your Alcohol Wipes, apply a light to moderate pressure, in small circles until the appearance defect until it is removed from the suspect area.",
-    "hand tap": "Using a Hand Tap, apply light to moderate pressure in a  clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically—roughly every half to full turn—to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
-    "dremel rotary tool": "Using your Dremel Rotary Tool, apply a light to moderate pressure, in small circles until the appearance defect until it is removed from the suspect area.",
-    "buffer pad": "Using the [type of tool] with an applicatorto apply a light to moderate pressure, in small circles, until the [defect] until it is removed from the suspect area.",
-    "polish cloth": "Using your Polish Cloth, apply a light to moderate pressure, in small circles until the appearance defect until it is removed from the suspect area.",
+    "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the appearance defect has been removed.",
+    "alcohol": "Using the alcohol and applicator provided, apply a light to moderate pressure in small circles until the appearance defect has been removed.",
+    "alcohol wipes": "Using the alcohol wipes provided, apply a light to moderate pressure in small circles until the appearance defect has been removed.",
+    "hand tap": "Using a Hand Tap, apply light to moderate pressure in a  clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the appearance defect has been removed.",
+    "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the appearance defect has been removed.",
+    "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the appearance defect has been removed.",
     "hammer/chisel": "Hold the chisel in your non-dominant hand, and place it flush against the surface while applying pressure to the base of the [defect]. Using your dominant hand, strike the head (butt) of the chisel with the hammer. Repeat this as needed to remove the weld splatter, but be sure not to dig the corners of the chisel into the surface, causing damage.",
-    "foam brush": "Using your Foam Brush, apply a light to moderate pressure, in small circles until the appearance defect until it is removed from the suspect area.",
-    "q-tips": "Using your Q-Tips, apply a light to moderate pressure, in small circles until the appearance defect until it is removed from the suspect area."
+    "foam brush": "Using the foam brush provided, apply a light to moderate pressure in small circles until the appearance defect has been removed.",
+    "q-tips": "Using the Q-Tips provided, apply a light to moderate pressure in small circles until the appearance defect has been removed.",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the appearance defect has been removed."
   },
   "burr": {
     "snips": "Using the Snips provided, apply moderate pressure to the [defect type] and make a back and forth motion, until the [defect type] is removed.",
     "file": "Using a steel file, apply moderate pressure to the [defect type] and make a back and forth motion, until the [defect type] is removed.",
     "deburring tool": "Using a Deburring Tool, apply light to moderate pressure to the defect and roll the deburring tool away from you. Repeat until the appearance defect is removed.",
     "hook pick": "Using a round Hook Pick, apply moderate pressure to the [defect type] and lift  away from you self, until the [defect type] is removed.",
-    "hand tap": "Using a Hand Tap, apply light to moderate pressure in a  clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically—roughly every half to full turn—to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
-    "impact drill": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the Froward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically—roughly every half to full turn—to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
-    "dremel rotary tool": "Using your Dremel Rotary Tool, apply a light to moderate pressure, in small circles until the appearance defect until it is removed from the suspect area.",
+    "hand tap": "Using a Hand Tap, apply light to moderate pressure in a  clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "impact drill": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the Froward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the burr has been removed.",
     "punch tool": "Using a round steel file, apply moderate pressure to the [defect type] and make a back and forth motion, until the [defect type] is removed.",
-    "hammer/chisel": "Place the chisel firmly against the burr, and tap it with the hammer while using a moderate amount of pressure."
+    "hammer/chisel": "Place the chisel firmly against the burr, and tap it with the hammer while using a moderate amount of pressure.",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the burr has been removed."
   },
   "chip": {
     "hand": "Chips cannot be reworked",
@@ -500,21 +529,22 @@
     "file": "Chips cannot be reworked",
     "deburring tool": "Chips cannot be reworked",
     "hook pick": "Chips cannot be reworked",
-    "microfiber towel": "Chips cannot be reworked",
-    "alcohol": "Chips cannot be reworked",
-    "alcohol wipes": "Chips cannot be reworked",
+    "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the chip has been removed.",
+    "alcohol": "Using the alcohol and applicator provided, apply a light to moderate pressure in small circles until the chip has been removed.",
+    "alcohol wipes": "Using the alcohol wipes provided, apply a light to moderate pressure in small circles until the chip has been removed.",
     "hand tap": "Chips cannot be reworked",
     "impact drill": "Chips cannot be reworked",
-    "dremel rotary tool": "Chips cannot be reworked",
+    "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the chip has been removed.",
     "punch tool": "Chips cannot be reworked",
-    "buffer pad": "Chips cannot be reworked",
-    "polish cloth": "Chips cannot be reworked",
+    "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the chip has been removed.",
+    "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the chip has been removed.",
     "hammer/chisel": "Chips cannot be reworked",
     "water leak rinse": "Chips cannot be reworked",
-    "foam brush": "Chips cannot be reworked",
-    "q-tips": "Chips cannot be reworked",
+    "foam brush": "Using the foam brush provided, apply a light to moderate pressure in small circles until the chip has been removed.",
+    "q-tips": "Using the Q-Tips provided, apply a light to moderate pressure in small circles until the chip has been removed.",
     "supplied clips": "Chips cannot be reworked",
-    "mating clips": "Chips cannot be reworked"
+    "mating clips": "Chips cannot be reworked",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the chip has been removed."
   },
   "crack": {
     "hand": "cracks cannot be reworked",
@@ -524,21 +554,22 @@
     "file": "cracks cannot be reworked",
     "deburring tool": "cracks cannot be reworked",
     "hook pick": "cracks cannot be reworked",
-    "microfiber towel": "cracks cannot be reworked",
-    "alcohol": "cracks cannot be reworked",
-    "alcohol wipes": "cracks cannot be reworked",
+    "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the crack has been removed.",
+    "alcohol": "Using the alcohol and applicator provided, apply a light to moderate pressure in small circles until the crack has been removed.",
+    "alcohol wipes": "Using the alcohol wipes provided, apply a light to moderate pressure in small circles until the crack has been removed.",
     "hand tap": "cracks cannot be reworked",
     "impact drill": "cracks cannot be reworked",
-    "dremel rotary tool": "cracks cannot be reworked",
+    "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the crack has been removed.",
     "punch tool": "cracks cannot be reworked",
-    "buffer pad": "cracks cannot be reworked",
-    "polish cloth": "cracks cannot be reworked",
+    "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the crack has been removed.",
+    "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the crack has been removed.",
     "hammer/chisel": "cracks cannot be reworked",
     "water leak rinse": "cracks cannot be reworked",
-    "foam brush": "cracks cannot be reworked",
-    "q-tips": "cracks cannot be reworked",
+    "foam brush": "Using the foam brush provided, apply a light to moderate pressure in small circles until the crack has been removed.",
+    "q-tips": "Using the Q-Tips provided, apply a light to moderate pressure in small circles until the crack has been removed.",
     "supplied clips": "cracks cannot be reworked",
-    "mating clips": "cracks cannot be reworked"
+    "mating clips": "cracks cannot be reworked",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the crack has been removed."
   },
   "cut": {
     "hand": "cuts cannot be reworked",
@@ -548,21 +579,22 @@
     "file": "cuts cannot be reworked",
     "deburring tool": "cuts cannot be reworked",
     "hook pick": "cuts cannot be reworked",
-    "microfiber towel": "cuts cannot be reworked",
-    "alcohol": "cuts cannot be reworked",
-    "alcohol wipes": "cuts cannot be reworked",
+    "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the cut has been removed.",
+    "alcohol": "Using the alcohol and applicator provided, apply a light to moderate pressure in small circles until the cut has been removed.",
+    "alcohol wipes": "Using the alcohol wipes provided, apply a light to moderate pressure in small circles until the cut has been removed.",
     "hand tap": "cuts cannot be reworked",
     "impact drill": "cuts cannot be reworked",
-    "dremel rotary tool": "cuts cannot be reworked",
+    "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the cut has been removed.",
     "punch tool": "cuts cannot be reworked",
-    "buffer pad": "cuts cannot be reworked",
-    "polish cloth": "cuts cannot be reworked",
+    "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the cut has been removed.",
+    "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the cut has been removed.",
     "hammer/chisel": "cuts cannot be reworked",
     "water leak rinse": "cuts cannot be reworked",
-    "foam brush": "cuts cannot be reworked",
-    "q-tips": "cuts cannot be reworked",
+    "foam brush": "Using the foam brush provided, apply a light to moderate pressure in small circles until the cut has been removed.",
+    "q-tips": "Using the Q-Tips provided, apply a light to moderate pressure in small circles until the cut has been removed.",
     "supplied clips": "cuts cannot be reworked",
-    "mating clips": "cuts cannot be reworked"
+    "mating clips": "cuts cannot be reworked",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the cut has been removed."
   },
   "damage": {
     "hand": "not a defect. The title needs to be more specific. Please remove.",
@@ -572,21 +604,22 @@
     "file": "not a defect. The title needs to be more specific. Please remove.",
     "deburring tool": "not a defect. The title needs to be more specific. Please remove.",
     "hook pick": "not a defect. The title needs to be more specific. Please remove.",
-    "microfiber towel": "not a defect. The title needs to be more specific. Please remove.",
-    "alcohol": "not a defect. The title needs to be more specific. Please remove.",
-    "alcohol wipes": "not a defect. The title needs to be more specific. Please remove.",
+    "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the damage has been removed.",
+    "alcohol": "Using the alcohol and applicator provided, apply a light to moderate pressure in small circles until the damage has been removed.",
+    "alcohol wipes": "Using the alcohol wipes provided, apply a light to moderate pressure in small circles until the damage has been removed.",
     "hand tap": "not a defect. The title needs to be more specific. Please remove.",
     "impact drill": "not a defect. The title needs to be more specific. Please remove.",
-    "dremel rotary tool": "not a defect. The title needs to be more specific. Please remove.",
+    "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the damage has been removed.",
     "punch tool": "not a defect. The title needs to be more specific. Please remove.",
-    "buffer pad": "not a defect. The title needs to be more specific. Please remove.",
-    "polish cloth": "not a defect. The title needs to be more specific. Please remove.",
+    "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the damage has been removed.",
+    "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the damage has been removed.",
     "hammer/chisel": "not a defect. The title needs to be more specific. Please remove.",
     "water leak rinse": "not a defect. The title needs to be more specific. Please remove.",
-    "foam brush": "not a defect. The title needs to be more specific. Please remove.",
-    "q-tips": "not a defect. The title needs to be more specific. Please remove.",
+    "foam brush": "Using the foam brush provided, apply a light to moderate pressure in small circles until the damage has been removed.",
+    "q-tips": "Using the Q-Tips provided, apply a light to moderate pressure in small circles until the damage has been removed.",
     "supplied clips": "not a defect. The title needs to be more specific. Please remove.",
-    "mating clips": "not a defect. The title needs to be more specific. Please remove."
+    "mating clips": "not a defect. The title needs to be more specific. Please remove.",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the damage has been removed."
   },
   "dent": {
     "hand": "Dents cannot be removed",
@@ -596,21 +629,22 @@
     "file": "Dents cannot be removed",
     "deburring tool": "Dents cannot be removed",
     "hook pick": "Dents cannot be removed",
-    "microfiber towel": "Dents cannot be removed",
-    "alcohol": "Dents cannot be removed",
-    "alcohol wipes": "Dents cannot be removed",
+    "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the dent has been removed.",
+    "alcohol": "Using the alcohol and applicator provided, apply a light to moderate pressure in small circles until the dent has been removed.",
+    "alcohol wipes": "Using the alcohol wipes provided, apply a light to moderate pressure in small circles until the dent has been removed.",
     "hand tap": "Dents cannot be removed",
     "impact drill": "Dents cannot be removed",
-    "dremel rotary tool": "Dents cannot be removed",
+    "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the dent has been removed.",
     "punch tool": "Dents cannot be removed",
-    "buffer pad": "Dents cannot be removed",
-    "polish cloth": "Dents cannot be removed",
+    "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the dent has been removed.",
+    "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the dent has been removed.",
     "hammer/chisel": "Dents cannot be removed",
     "water leak rinse": "Dents cannot be removed",
-    "foam brush": "Dents cannot be removed",
-    "q-tips": "Dents cannot be removed",
+    "foam brush": "Using the foam brush provided, apply a light to moderate pressure in small circles until the dent has been removed.",
+    "q-tips": "Using the Q-Tips provided, apply a light to moderate pressure in small circles until the dent has been removed.",
     "supplied clips": "Dents cannot be removed",
-    "mating clips": "Dents cannot be removed"
+    "mating clips": "Dents cannot be removed",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the dent has been removed."
   },
   "foreign material": {
     "hand": "Using the fingers of your [type of glove based on material selected], grasp the [defect] and remove it carefully by lifting it away.",
@@ -620,56 +654,61 @@
     "file": "Using your [type of removal tool], apply a light to moderate pressure to the [defect], in a back and forth motion, until it is removed from the suspect area.",
     "deburring tool": "Using a Deburring Tool, apply light to moderate pressure to the [defect] and roll the deburring tool away from you. Repeat until the [defect] is removed.",
     "hook pick": "Using a [type of removal tool], apply light to moderate pressure to lift away the [defect].",
-    "microfiber towel": "Using the [rag, Cloth, or towel], apply light to moderate pressure in small circles to remove the [defect].",
-    "alcohol": "Using the [chemical] and approved applicator to apply a light to moderate pressure in small circles to remove the [defect].",
-    "alcohol wipes": "Using the [type of tool], apply light to moderate pressure in small circles to remove the [defect].",
-    "hand tap": "Using a Hand Tap, apply light to moderate pressure in a  clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically—roughly every half to full turn—to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
-    "impact drill": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the Froward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically—roughly every half to full turn—to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
-    "dremel rotary tool": "Using your Dremel Rotary Tool, apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area.",
-    "buffer pad": "Using your [type of polishing or buffing tool], apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area.",
-    "polish cloth": "Using your [type of polishing or buffing tool], apply a light pressure, in small circles until the [defect] until it is removed from the suspect area.",
+    "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the foreign material has been removed.",
+    "alcohol": "Using the alcohol and applicator provided, apply a light to moderate pressure in small circles until the foreign material has been removed.",
+    "alcohol wipes": "Using the alcohol wipes provided, apply a light to moderate pressure in small circles until the foreign material has been removed.",
+    "hand tap": "Using a Hand Tap, apply light to moderate pressure in a  clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "impact drill": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the Froward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the foreign material has been removed.",
+    "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the foreign material has been removed.",
+    "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the foreign material has been removed.",
     "hammer/chisel": "Hold the chisel in your non-dominant hand, and place it flush against the surface while applying pressure to the base of the [defect]. Using your dominant hand, strike the head (butt) of the chisel with the hammer. Repeat this as needed to remove the weld splatter, but be sure not to dig the corners of the chisel into the surface, causing damage.",
-    "foam brush": "Using your [type of polishing or buffing tool], apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area.",
-    "q-tips": "Using your Q-Tips, apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area."
+    "foam brush": "Using the foam brush provided, apply a light to moderate pressure in small circles until the foreign material has been removed.",
+    "q-tips": "Using the Q-Tips provided, apply a light to moderate pressure in small circles until the foreign material has been removed.",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the foreign material has been removed."
   },
   "mark": {
     "hand": "Using the fingers of your [type of glove based on material selected], remove the [defect] carefully by rubbing back while applying a light to moderate pressure.",
     "snips": "Using your [type of cutting tool], genlty cut away the [defect] from the suspect area.",
     "file": "Using your [type of removal tool], apply a light to moderate pressure to the [defect], in a back and forth motion, until it is removed from the suspect area.",
     "hook pick": "Using a [type of removal tool], apply light to moderate pressure to lift away the [defect].",
-    "microfiber towel": "Using the [type of tool], apply light to moderate pressure in small circles to remove the [defect].",
-    "alcohol": "Using the [type of chemical] and approved applicator to apply a light to moderate pressure in small circles to remove the [defect].",
-    "alcohol wipes": "Using the [type of tool], apply light to moderate pressure in small circles to remove the [defect].",
-    "dremel rotary tool": "Using your [type of removal tool], apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area.",
-    "buffer pad": "Using your [type of polishing or buffing tool], apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area.",
-    "polish cloth": "Using your [type of polishing or buffing tool], apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area.",
-    "foam brush": "Using your [type of polishing or buffing tool], apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area.",
-    "q-tips": "Using your Q-Tips, apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area."
+    "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the mark has been removed.",
+    "alcohol": "Using the alcohol and applicator provided, apply a light to moderate pressure in small circles until the mark has been removed.",
+    "alcohol wipes": "Using the alcohol wipes provided, apply a light to moderate pressure in small circles until the mark has been removed.",
+    "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the mark has been removed.",
+    "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the mark has been removed.",
+    "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the mark has been removed.",
+    "foam brush": "Using the foam brush provided, apply a light to moderate pressure in small circles until the mark has been removed.",
+    "q-tips": "Using the Q-Tips provided, apply a light to moderate pressure in small circles until the mark has been removed.",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the mark has been removed."
   },
   "scratch": {
-    "microfiber towel": "Using the [type of tool], apply light to moderate pressure in small circles to remove the [defect].",
-    "alcohol": "Using the [type of tool] and approved applicator to apply a light to moderate pressure in small circles to remove the [defect].",
-    "buffer pad": "Using your [type of polishing or buffing tool], apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area.",
-    "polish cloth": "Using your [type of polishing or buffing tool], apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area.",
-    "foam brush": "Using your [type of polishing or buffing tool], apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area."
+    "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the scratch has been removed.",
+    "alcohol": "Using the alcohol and applicator provided, apply a light to moderate pressure in small circles until the scratch has been removed.",
+    "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the scratch has been removed.",
+    "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the scratch has been removed.",
+    "foam brush": "Using the foam brush provided, apply a light to moderate pressure in small circles until the scratch has been removed.",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the scratch has been removed."
   },
   "streak": {
     "hook pick": "n/",
-    "microfiber towel": "Using the [rag, Cloth, or towel], apply light to moderate pressure in small circles to remove the [defect].",
-    "alcohol": "Using the [type of tool] and approved applicator to apply a light to moderate pressure in small circles to remove the [defect].",
-    "alcohol wipes": "Using the [type of tool], apply light to moderate pressure in small circles to remove the [defect].",
-    "buffer pad": "Using your [type of polishing or buffing tool], apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area.",
-    "polish cloth": "Using the [rag, Cloth, or towel], apply light pressure in small circles to remove the [defect].",
-    "foam brush": "Using your [type of polishing or buffing tool], apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area."
+    "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the streak has been removed.",
+    "alcohol": "Using the alcohol and applicator provided, apply a light to moderate pressure in small circles until the streak has been removed.",
+    "alcohol wipes": "Using the alcohol wipes provided, apply a light to moderate pressure in small circles until the streak has been removed.",
+    "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the streak has been removed.",
+    "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the streak has been removed.",
+    "foam brush": "Using the foam brush provided, apply a light to moderate pressure in small circles until the streak has been removed.",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the streak has been removed."
   },
   "weld splatter": {
     "file": "Using your [type of removal tool], apply a light to moderate pressure to the [defect], in a back and forth motion, until it is removed from the suspect area.",
     "deburring tool": "Using a Deburring Tool, apply light to moderate pressure to the [defect] and roll the deburring tool away from you. Repeat until the [defect] is removed.",
     "hook pick": "n.a",
-    "hand tap": "Using a Hand Tap, apply light to moderate pressure in a  clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically—roughly every half to full turn—to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
-    "impact drill": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the Froward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically—roughly every half to full turn—to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
-    "dremel rotary tool": "Using your Dremel Rotary Tool, apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area.",
-    "hammer/chisel": "Hold the chisel in your non-dominant hand, and place it flush against the surface while applying pressure to the base of the [defect]. Using your dominant hand, strike the head (butt) of the chisel with the hammer. Repeat this as needed to remove the weld splatter, but be sure not to dig the corners of the chisel into the surface, causing damage."
+    "hand tap": "Using a Hand Tap, apply light to moderate pressure in a  clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "impact drill": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the Froward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the weld splatter has been removed.",
+    "hammer/chisel": "Hold the chisel in your non-dominant hand, and place it flush against the surface while applying pressure to the base of the [defect]. Using your dominant hand, strike the head (butt) of the chisel with the hammer. Repeat this as needed to remove the weld splatter, but be sure not to dig the corners of the chisel into the surface, causing damage.",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the weld splatter has been removed."
   },
   "excess material": {
     "hand": "Using the fingers of your [type of glove based on material selected], remove the [defect] carefully.",
@@ -679,10 +718,11 @@
     "file": "Using your [type of removal tool], apply a light to moderate pressure to the [defect], in a back and forth motion, until it is removed from the suspect area.",
     "deburring tool": "Using a Deburring Tool, apply light to moderate pressure to the [defect] and roll the deburring tool away from you. Repeat until the [defect] is removed.",
     "hook pick": "Using a [type of removal tool], apply light to moderate pressure to lift away the [defect].",
-    "hand tap": "Using a Hand Tap, apply light to moderate pressure in a  clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically—roughly every half to full turn—to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
-    "impact drill": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the Froward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically—roughly every half to full turn—to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
-    "dremel rotary tool": "Using your Dremel Rotary Tool, apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area.",
-    "hammer/chisel": "Hold the chisel in your non-dominant hand, and place it flush against the surface while applying pressure to the base of the [defect]. Using your dominant hand, strike the head (butt) of the chisel with the hammer. Repeat this as needed to remove the weld splatter, but be sure not to dig the corners of the chisel into the surface, causing damage."
+    "hand tap": "Using a Hand Tap, apply light to moderate pressure in a  clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "impact drill": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the Froward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the excess material has been removed.",
+    "hammer/chisel": "Hold the chisel in your non-dominant hand, and place it flush against the surface while applying pressure to the base of the [defect]. Using your dominant hand, strike the head (butt) of the chisel with the hammer. Repeat this as needed to remove the weld splatter, but be sure not to dig the corners of the chisel into the surface, causing damage.",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the excess material has been removed."
   },
   "flash": {
     "hand pull": "Using the fingers of your [type of glove based on material selected], grasp the [defect] and remove it carefully by lifting it away.",
@@ -690,10 +730,11 @@
     "file": "Using your [type of removal tool], apply a light to moderate pressure to the [defect], in a back and forth motion, until it is removed from the suspect area.",
     "deburring tool": "Using a Deburring Tool, apply light to moderate pressure to the [defect] and roll the deburring tool away from you. Repeat until the [defect] is removed.",
     "hook pick": "Using a [type of removal tool], apply light to moderate pressure to lift away the [defect].",
-    "hand tap": "Using a Hand Tap, apply light to moderate pressure in a  clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically—roughly every half to full turn—to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
-    "impact drill": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the Froward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically—roughly every half to full turn—to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
-    "dremel rotary tool": "Using your Dremel Rotary Tool, apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area.",
-    "hammer/chisel": "Hold the chisel in your non-dominant hand, and place it flush against the surface while applying pressure to the base of the [defect]. Using your dominant hand, strike the head (butt) of the chisel with the hammer. Repeat this as needed to remove the weld splatter, but be sure not to dig the corners of the chisel into the surface, causing damage."
+    "hand tap": "Using a Hand Tap, apply light to moderate pressure in a  clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "impact drill": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the Froward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the flash has been removed.",
+    "hammer/chisel": "Hold the chisel in your non-dominant hand, and place it flush against the surface while applying pressure to the base of the [defect]. Using your dominant hand, strike the head (butt) of the chisel with the hammer. Repeat this as needed to remove the weld splatter, but be sure not to dig the corners of the chisel into the surface, causing damage.",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the flash has been removed."
   },
   "short shot": {
     "hand": "short shots cannot be reworked. They are a lack of material or molding defect causing deformation of the material.",
@@ -703,36 +744,38 @@
     "file": "short shots cannot be reworked. They are a lack of material or molding defect causing deformation of the material.",
     "deburring tool": "short shots cannot be reworked. They are a lack of material or molding defect causing deformation of the material.",
     "hook pick": "short shots cannot be reworked. They are a lack of material or molding defect causing deformation of the material.",
-    "microfiber towel": "short shots cannot be reworked. They are a lack of material or molding defect causing deformation of the material.",
-    "alcohol": "short shots cannot be reworked. They are a lack of material or molding defect causing deformation of the material.",
-    "alcohol wipes": "short shots cannot be reworked. They are a lack of material or molding defect causing deformation of the material.",
+    "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the short shot has been removed.",
+    "alcohol": "Using the alcohol and applicator provided, apply a light to moderate pressure in small circles until the short shot has been removed.",
+    "alcohol wipes": "Using the alcohol wipes provided, apply a light to moderate pressure in small circles until the short shot has been removed.",
     "hand tap": "short shots cannot be reworked. They are a lack of material or molding defect causing deformation of the material.",
     "impact drill": "short shots cannot be reworked. They are a lack of material or molding defect causing deformation of the material.",
-    "dremel rotary tool": "short shots cannot be reworked. They are a lack of material or molding defect causing deformation of the material.",
+    "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the short shot has been removed.",
     "punch tool": "short shots cannot be reworked. They are a lack of material or molding defect causing deformation of the material.",
-    "buffer pad": "short shots cannot be reworked. They are a lack of material or molding defect causing deformation of the material.",
-    "polish cloth": "short shots cannot be reworked. They are a lack of material or molding defect causing deformation of the material.",
+    "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the short shot has been removed.",
+    "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the short shot has been removed.",
     "hammer/chisel": "short shots cannot be reworked. They are a lack of material or molding defect causing deformation of the material.",
     "water leak rinse": "short shots cannot be reworked. They are a lack of material or molding defect causing deformation of the material.",
-    "foam brush": "short shots cannot be reworked. They are a lack of material or molding defect causing deformation of the material.",
-    "q-tips": "short shots cannot be reworked. They are a lack of material or molding defect causing deformation of the material.",
+    "foam brush": "Using the foam brush provided, apply a light to moderate pressure in small circles until the short shot has been removed.",
+    "q-tips": "Using the Q-Tips provided, apply a light to moderate pressure in small circles until the short shot has been removed.",
     "supplied clips": "short shots cannot be reworked. They are a lack of material or molding defect causing deformation of the material.",
-    "mating clips": "short shots cannot be reworked. They are a lack of material or molding defect causing deformation of the material."
+    "mating clips": "short shots cannot be reworked. They are a lack of material or molding defect causing deformation of the material.",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the short shot has been removed."
   },
   "debris": {
     "hand": "Using the fingers of your [type of glove based on material selected], remove the [defect] carefully.",
     "hand pull": "Using the fingers of your [type of glove based on material selected], grasp the [defect] and remove it carefully by lifting it away.",
     "file": "Using a [type of filing tool], apply moderate pressure to the [defect type] and make a back and forth motion, until the [defect type] is removed.",
     "hook pick": "Using a [type of removal tool], apply light to moderate pressure to lift away the [defect].",
-    "microfiber towel": "Using the [rag, Cloth, or towel], apply light to moderate pressure in small circles to remove the [defect].",
-    "alcohol": "Using the [type of tool] and approved applicator to apply a light to moderate pressure in small circles to remove the [defect].",
-    "alcohol wipes": "Using the [type of tool], apply light to moderate pressure in small circles to remove the [defect].",
-    "hand tap": "Using a Hand Tap, apply light to moderate pressure in a  clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically—roughly every half to full turn—to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
-    "impact drill": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the Froward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically—roughly every half to full turn—to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
-    "buffer pad": "Using your [type of polishing or buffing tool], apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area.",
-    "polish cloth": "Using the [rag, Cloth, or towel], apply light pressure in small circles to remove the [defect].",
-    "foam brush": "Using your [type of polishing or buffing tool], apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area.",
-    "q-tips": "Using the Q-Tips provided, apply a light to moderate pressure, and roll the Q-Tip, lifiting the [defect] away until it is removed from the suspect area."
+    "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the debris has been removed.",
+    "alcohol": "Using the alcohol and applicator provided, apply a light to moderate pressure in small circles until the debris has been removed.",
+    "alcohol wipes": "Using the alcohol wipes provided, apply a light to moderate pressure in small circles until the debris has been removed.",
+    "hand tap": "Using a Hand Tap, apply light to moderate pressure in a  clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "impact drill": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the Froward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the debris has been removed.",
+    "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the debris has been removed.",
+    "foam brush": "Using the foam brush provided, apply a light to moderate pressure in small circles until the debris has been removed.",
+    "q-tips": "Using the Q-Tips provided, apply a light to moderate pressure in small circles until the debris has been removed.",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the debris has been removed."
   },
   "obstruction": {
     "hand": "Using the fingers of your [type of glove based on material selected], remove the [defect] carefully.",
@@ -742,18 +785,19 @@
     "file": "Using your [type of removal tool], apply a light to moderate pressure to the [defect], in a back and forth motion, until it is removed from the suspect area.",
     "deburring tool": "Using a Deburring Tool, apply light to moderate pressure to the [defect] and roll the deburring tool away from you. Repeat until the [defect] is removed.",
     "hook pick": "Using a [type of removal tool], apply light to moderate pressure to lift away the [defect].",
-    "microfiber towel": "Using the [rag, Cloth, or towel], apply light to moderate pressure in small circles to remove the [defect].",
-    "alcohol": "Using the [type of tool] and approved applicator to apply a light to moderate pressure in small circles to remove the [defect].",
-    "alcohol wipes": "Using the [type of tool], apply light to moderate pressure in small circles to remove the [defect].",
-    "hand tap": "Using a Hand Tap, apply light to moderate pressure in a  clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically—roughly every half to full turn—to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
-    "impact drill": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the Froward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically—roughly every half to full turn—to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
-    "dremel rotary tool": "Using your Dremel Rotary Tool, apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area.",
+    "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the obstruction has been removed.",
+    "alcohol": "Using the alcohol and applicator provided, apply a light to moderate pressure in small circles until the obstruction has been removed.",
+    "alcohol wipes": "Using the alcohol wipes provided, apply a light to moderate pressure in small circles until the obstruction has been removed.",
+    "hand tap": "Using a Hand Tap, apply light to moderate pressure in a  clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "impact drill": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the Froward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the obstruction has been removed.",
     "punch tool": "Using your [type of polishing or buffing tool], apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area.",
-    "buffer pad": "Using your [type of polishing or buffing tool], apply a light pressure, in small circles until the [defect] until it is removed from the suspect area.",
-    "polish cloth": "Using the [type of tool], apply a light to moderate pressure, until the [defect] until it is removed from the suspect area.",
+    "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the obstruction has been removed.",
+    "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the obstruction has been removed.",
     "hammer/chisel": "Hold the chisel in your non-dominant hand, and place it flush against the surface while applying pressure to the base of the [defect]. Using your dominant hand, strike the head (butt) of the chisel with the hammer. Repeat this as needed to remove the weld splatter, but be sure not to dig the corners of the chisel into the surface, causing damage.",
-    "foam brush": "Using your [type of polishing or buffing tool], apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area.",
-    "q-tips": "Using your Q-Tips, apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area."
+    "foam brush": "Using the foam brush provided, apply a light to moderate pressure in small circles until the obstruction has been removed.",
+    "q-tips": "Using the Q-Tips provided, apply a light to moderate pressure in small circles until the obstruction has been removed.",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the obstruction has been removed."
   },
   "debris / obstruction": {
     "hand": "[remove this repeated defect. Refer to the answers for obstruction.]",
@@ -763,46 +807,50 @@
     "file": "[remove this repeated defect. Refer to the answers for obstruction.]",
     "deburring tool": "[remove this repeated defect. Refer to the answers for obstruction.]",
     "hook pick": "[remove this repeated defect. Refer to the answers for obstruction.]",
-    "microfiber towel": "[remove this repeated defect. Refer to the answers for obstruction.]",
-    "alcohol": "[remove this repeated defect. Refer to the answers for obstruction.]",
-    "alcohol wipes": "[remove this repeated defect. Refer to the answers for obstruction.]",
+    "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the debris / obstruction has been removed.",
+    "alcohol": "Using the alcohol and applicator provided, apply a light to moderate pressure in small circles until the debris / obstruction has been removed.",
+    "alcohol wipes": "Using the alcohol wipes provided, apply a light to moderate pressure in small circles until the debris / obstruction has been removed.",
     "hand tap": "[remove this repeated defect. Refer to the answers for obstruction.]",
     "impact drill": "[remove this repeated defect. Refer to the answers for obstruction.]",
-    "dremel rotary tool": "[remove this repeated defect. Refer to the answers for obstruction.]",
+    "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the debris / obstruction has been removed.",
     "punch tool": "[remove this repeated defect. Refer to the answers for obstruction.]",
-    "buffer pad": "[remove this repeated defect. Refer to the answers for obstruction.]",
-    "polish cloth": "[remove this repeated defect. Refer to the answers for obstruction.]",
+    "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the debris / obstruction has been removed.",
+    "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the debris / obstruction has been removed.",
     "hammer/chisel": "[remove this repeated defect. Refer to the answers for obstruction.]",
     "water leak rinse": "[remove this repeated defect. Refer to the answers for obstruction.]",
-    "foam brush": "[remove this repeated defect. Refer to the answers for obstruction.]",
-    "q-tips": "[remove this repeated defect. Refer to the answers for obstruction.]",
+    "foam brush": "Using the foam brush provided, apply a light to moderate pressure in small circles until the debris / obstruction has been removed.",
+    "q-tips": "Using the Q-Tips provided, apply a light to moderate pressure in small circles until the debris / obstruction has been removed.",
     "supplied clips": "[remove this repeated defect. Refer to the answers for obstruction.]",
-    "mating clips": "[remove this repeated defect. Refer to the answers for obstruction.]"
+    "mating clips": "[remove this repeated defect. Refer to the answers for obstruction.]",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the debris / obstruction has been removed."
   },
   "residue": {
     "hook pick": "n/",
-    "microfiber towel": "Using the [rag, Cloth, or towel], apply light to moderate pressure in small circles to remove the [defect].",
-    "alcohol": "Using the [type of tool] and approved applicator to apply a light to moderate pressure in small circles to remove the [defect].",
-    "alcohol wipes": "Using the [type of tool], apply light to moderate pressure in small circles to remove the [defect].",
-    "buffer pad": "Using your [type of polishing or buffing tool], apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area.",
-    "polish cloth": "Using the [rag, Cloth, or towel], apply light pressure in small circles to remove the [defect].",
-    "foam brush": "Using your [type of polishing or buffing tool], apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area."
+    "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the residue has been removed.",
+    "alcohol": "Using the alcohol and applicator provided, apply a light to moderate pressure in small circles until the residue has been removed.",
+    "alcohol wipes": "Using the alcohol wipes provided, apply a light to moderate pressure in small circles until the residue has been removed.",
+    "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the residue has been removed.",
+    "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the residue has been removed.",
+    "foam brush": "Using the foam brush provided, apply a light to moderate pressure in small circles until the residue has been removed.",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the residue has been removed."
   },
   "surface marks": {
     "hook pick": "n/",
-    "microfiber towel": "Using the [rag, Cloth, or towel], apply light to moderate pressure in small circles to remove the [defect].",
-    "alcohol": "Using the [type of tool] and approved applicator to apply a light to moderate pressure in small circles to remove the [defect].",
-    "alcohol wipes": "Using the [type of tool], apply light to moderate pressure in small circles to remove the [defect].",
-    "buffer pad": "Using your [type of polishing or buffing tool], apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area.",
-    "polish cloth": "Using the [rag, Cloth, or towel], apply light pressure in small circles to remove the [defect].",
-    "foam brush": "Using your [type of polishing or buffing tool], apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area."
+    "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the surface marks has been removed.",
+    "alcohol": "Using the alcohol and applicator provided, apply a light to moderate pressure in small circles until the surface marks has been removed.",
+    "alcohol wipes": "Using the alcohol wipes provided, apply a light to moderate pressure in small circles until the surface marks has been removed.",
+    "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the surface marks has been removed.",
+    "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the surface marks has been removed.",
+    "foam brush": "Using the foam brush provided, apply a light to moderate pressure in small circles until the surface marks has been removed.",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the surface marks has been removed."
   },
   "paint surface marks": {
     "hook pick": "n/",
-    "microfiber towel": "Using the [rag, Cloth, or towel], apply light to moderate pressure in small circles to remove the [defect].",
-    "buffer pad": "Using your [type of polishing or buffing tool], apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area.",
-    "polish cloth": "Using the [rag, Cloth, or towel], apply light pressure in small circles to remove the [defect].",
-    "foam brush": "Using your [type of polishing or buffing tool], apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area."
+    "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the paint surface marks has been removed.",
+    "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the paint surface marks has been removed.",
+    "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the paint surface marks has been removed.",
+    "foam brush": "Using the foam brush provided, apply a light to moderate pressure in small circles until the paint surface marks has been removed.",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the paint surface marks has been removed."
   },
   "miscut": {
     "hand pull": "Using the fingers of your [type of glove based on material selected], grasp the [defect] and remove it carefully by lifting it away.",
@@ -810,9 +858,10 @@
     "file": "Using your [type of removal tool], apply a light to moderate pressure to the [defect], in a back and forth motion, until it is removed from the suspect area.",
     "deburring tool": "Using a Deburring Tool, apply light to moderate pressure to the [defect] and roll the deburring tool away from you. Repeat until the [defect] is removed.",
     "hook pick": "Using a [type of removal tool], apply light to moderate pressure to lift away the [defect].",
-    "hand tap": "Using a Hand Tap, apply light to moderate pressure in a  clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically—roughly every half to full turn—to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
-    "dremel rotary tool": "Using your Dremel Rotary Tool, apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area.",
-    "hammer/chisel": "Hold the chisel in your non-dominant hand, and place it flush against the surface while applying pressure to the base of the [defect]. Using your dominant hand, strike the head (butt) of the chisel with the hammer. Repeat this as needed to remove the weld splatter, but be sure not to dig the corners of the chisel into the surface, causing damage."
+    "hand tap": "Using a Hand Tap, apply light to moderate pressure in a  clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the miscut has been removed.",
+    "hammer/chisel": "Hold the chisel in your non-dominant hand, and place it flush against the surface while applying pressure to the base of the [defect]. Using your dominant hand, strike the head (butt) of the chisel with the hammer. Repeat this as needed to remove the weld splatter, but be sure not to dig the corners of the chisel into the surface, causing damage.",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the miscut has been removed."
   },
   "misassembled": {
     "hand": "[Do not suggest reworks for misassembled]",
@@ -822,32 +871,34 @@
     "file": "[Do not suggest reworks for misassembled]",
     "deburring tool": "[Do not suggest reworks for misassembled]",
     "hook pick": "[Do not suggest reworks for misassembled]",
-    "microfiber towel": "[Do not suggest reworks for misassembled]",
-    "alcohol": "[Do not suggest reworks for misassembled]",
-    "alcohol wipes": "[Do not suggest reworks for misassembled]",
+    "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the misassembled has been removed.",
+    "alcohol": "Using the alcohol and applicator provided, apply a light to moderate pressure in small circles until the misassembled has been removed.",
+    "alcohol wipes": "Using the alcohol wipes provided, apply a light to moderate pressure in small circles until the misassembled has been removed.",
     "hand tap": "[Do not suggest reworks for misassembled]",
     "impact drill": "[Do not suggest reworks for misassembled]",
-    "dremel rotary tool": "[Do not suggest reworks for misassembled]",
+    "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the misassembled has been removed.",
     "punch tool": "[Do not suggest reworks for misassembled]",
-    "buffer pad": "[Do not suggest reworks for misassembled]",
-    "polish cloth": "[Do not suggest reworks for misassembled]",
+    "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the misassembled has been removed.",
+    "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the misassembled has been removed.",
     "hammer/chisel": "[Do not suggest reworks for misassembled]",
     "water leak rinse": "[Do not suggest reworks for misassembled]",
-    "foam brush": "[Do not suggest reworks for misassembled]",
-    "q-tips": "[Do not suggest reworks for misassembled]",
+    "foam brush": "Using the foam brush provided, apply a light to moderate pressure in small circles until the misassembled has been removed.",
+    "q-tips": "Using the Q-Tips provided, apply a light to moderate pressure in small circles until the misassembled has been removed.",
     "supplied clips": "[Do not suggest reworks for misassembled]",
-    "mating clips": "[Do not suggest reworks for misassembled]"
+    "mating clips": "[Do not suggest reworks for misassembled]",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the misassembled has been removed."
   },
   "thread contamination": {
     "hook pick": "Using a [type of removal tool], apply light to moderate pressure to lift away the [defect].",
-    "microfiber towel": "Using the [rag, Cloth, or towel], apply light to moderate pressure in small circles to remove the [defect].",
-    "alcohol": "Using the [chemical] and approved applicator to apply a light to moderate pressure in small circles to remove the [defect].",
-    "alcohol wipes": "Using the [type of tool], apply light to moderate pressure in small circles to remove the [defect].",
-    "hand tap": "Using a Hand Tap, apply light to moderate pressure in a  clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically—roughly every half to full turn—to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
-    "impact drill": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the Froward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically—roughly every half to full turn—to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
-    "polish cloth": "Using the [rag. Cloth, or towel], apply light to moderate pressure in small circles to remove the [defect].",
-    "foam brush": "Using your [type of polishing or buffing tool], apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area.",
-    "q-tips": "Using your Q-Tips, apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area."
+    "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the thread contamination has been removed.",
+    "alcohol": "Using the alcohol and applicator provided, apply a light to moderate pressure in small circles until the thread contamination has been removed.",
+    "alcohol wipes": "Using the alcohol wipes provided, apply a light to moderate pressure in small circles until the thread contamination has been removed.",
+    "hand tap": "Using a Hand Tap, apply light to moderate pressure in a  clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "impact drill": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the Froward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the thread contamination has been removed.",
+    "foam brush": "Using the foam brush provided, apply a light to moderate pressure in small circles until the thread contamination has been removed.",
+    "q-tips": "Using the Q-Tips provided, apply a light to moderate pressure in small circles until the thread contamination has been removed.",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the thread contamination has been removed."
   },
   "ng dimension": {
     "hand": "Using the fingers of your [type of glove based on material selected], remove the [defect] carefully.",
@@ -857,9 +908,10 @@
     "file": "Using your [type of removal tool], apply a light to moderate pressure to the [defect], in a back and forth motion, until it is removed from the suspect area.",
     "deburring tool": "Using a Deburring Tool, apply light to moderate pressure to the [defect] and roll the deburring tool away from you. Repeat until the [defect] is removed.",
     "hook pick": "Using a [type of removal tool], apply light to moderate pressure to lift away the [defect].",
-    "hand tap": "Using a Hand Tap, apply light to moderate pressure in a  clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically—roughly every half to full turn—to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
-    "dremel rotary tool": "Using your Dremel Rotary Tool, apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area.",
-    "hammer/chisel": "Hold the chisel in your non-dominant hand, and place it flush against the surface while applying pressure to the base of the [defect]. Using your dominant hand, strike the head (butt) of the chisel with the hammer. Repeat this as needed to remove the weld splatter, but be sure not to dig the corners of the chisel into the surface, causing damage."
+    "hand tap": "Using a Hand Tap, apply light to moderate pressure in a  clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the ng dimension has been removed.",
+    "hammer/chisel": "Hold the chisel in your non-dominant hand, and place it flush against the surface while applying pressure to the base of the [defect]. Using your dominant hand, strike the head (butt) of the chisel with the hammer. Repeat this as needed to remove the weld splatter, but be sure not to dig the corners of the chisel into the surface, causing damage.",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the ng dimension has been removed."
   },
   "misstamped": {
     "hand": "[do not suggest rework for misstamped]",
@@ -869,21 +921,22 @@
     "file": "[do not suggest rework for misstamped]",
     "deburring tool": "[do not suggest rework for misstamped]",
     "hook pick": "[do not suggest rework for misstamped]",
-    "microfiber towel": "[do not suggest rework for misstamped]",
-    "alcohol": "[do not suggest rework for misstamped]",
-    "alcohol wipes": "[do not suggest rework for misstamped]",
+    "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the misstamped has been removed.",
+    "alcohol": "Using the alcohol and applicator provided, apply a light to moderate pressure in small circles until the misstamped has been removed.",
+    "alcohol wipes": "Using the alcohol wipes provided, apply a light to moderate pressure in small circles until the misstamped has been removed.",
     "hand tap": "[do not suggest rework for misstamped]",
     "impact drill": "[do not suggest rework for misstamped]",
-    "dremel rotary tool": "[do not suggest rework for misstamped]",
+    "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the misstamped has been removed.",
     "punch tool": "[do not suggest rework for misstamped]",
-    "buffer pad": "[do not suggest rework for misstamped]",
-    "polish cloth": "[do not suggest rework for misstamped]",
+    "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the misstamped has been removed.",
+    "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the misstamped has been removed.",
     "hammer/chisel": "[do not suggest rework for misstamped]",
     "water leak rinse": "[do not suggest rework for misstamped]",
-    "foam brush": "[do not suggest rework for misstamped]",
-    "q-tips": "[do not suggest rework for misstamped]",
+    "foam brush": "Using the foam brush provided, apply a light to moderate pressure in small circles until the misstamped has been removed.",
+    "q-tips": "Using the Q-Tips provided, apply a light to moderate pressure in small circles until the misstamped has been removed.",
     "supplied clips": "[do not suggest rework for misstamped]",
-    "mating clips": "[do not suggest rework for misstamped]"
+    "mating clips": "[do not suggest rework for misstamped]",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the misstamped has been removed."
   },
   "mark / streak": {
     "hand": "[repeated defects. Please remove.]",
@@ -893,25 +946,27 @@
     "file": "[repeated defects. Please remove.]",
     "deburring tool": "[repeated defects. Please remove.]",
     "hook pick": "[repeated defects. Please remove.]",
-    "microfiber towel": "[repeated defects. Please remove.]",
-    "alcohol": "[repeated defects. Please remove.]",
-    "alcohol wipes": "[repeated defects. Please remove.]",
+    "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the mark / streak has been removed.",
+    "alcohol": "Using the alcohol and applicator provided, apply a light to moderate pressure in small circles until the mark / streak has been removed.",
+    "alcohol wipes": "Using the alcohol wipes provided, apply a light to moderate pressure in small circles until the mark / streak has been removed.",
     "hand tap": "[repeated defects. Please remove.]",
     "impact drill": "[repeated defects. Please remove.]",
-    "dremel rotary tool": "[repeated defects. Please remove.]",
+    "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the mark / streak has been removed.",
     "punch tool": "[repeated defects. Please remove.]",
-    "buffer pad": "[repeated defects. Please remove.]",
-    "polish cloth": "[repeated defects. Please remove.]",
+    "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the mark / streak has been removed.",
+    "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the mark / streak has been removed.",
     "hammer/chisel": "[repeated defects. Please remove.]",
     "water leak rinse": "[repeated defects. Please remove.]",
-    "foam brush": "[repeated defects. Please remove.]",
-    "q-tips": "[repeated defects. Please remove.]",
+    "foam brush": "Using the foam brush provided, apply a light to moderate pressure in small circles until the mark / streak has been removed.",
+    "q-tips": "Using the Q-Tips provided, apply a light to moderate pressure in small circles until the mark / streak has been removed.",
     "supplied clips": "[repeated defects. Please remove.]",
-    "mating clips": "[repeated defects. Please remove.]"
+    "mating clips": "[repeated defects. Please remove.]",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the mark / streak has been removed."
   },
   "thread issue": {
-    "hand tap": "Using a Hand Tap, apply light to moderate pressure in a  clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically—roughly every half to full turn—to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
-    "impact drill": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the Froward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically—roughly every half to full turn—to break metal chips, prevent jamming, and avoid breaking the tap inside the hole"
+    "hand tap": "Using a Hand Tap, apply light to moderate pressure in a  clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "impact drill": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the Froward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the thread issue has been removed."
   },
   "thread issue / contamination": {
     "hand": "[repeated defect. Please remove]",
@@ -921,21 +976,22 @@
     "file": "[repeated defect. Please remove]",
     "deburring tool": "[repeated defect. Please remove]",
     "hook pick": "[repeated defect. Please remove]",
-    "microfiber towel": "[repeated defect. Please remove]",
-    "alcohol": "[repeated defect. Please remove]",
-    "alcohol wipes": "[repeated defect. Please remove]",
+    "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the thread issue / contamination has been removed.",
+    "alcohol": "Using the alcohol and applicator provided, apply a light to moderate pressure in small circles until the thread issue / contamination has been removed.",
+    "alcohol wipes": "Using the alcohol wipes provided, apply a light to moderate pressure in small circles until the thread issue / contamination has been removed.",
     "hand tap": "[repeated defect. Please remove]",
     "impact drill": "[repeated defect. Please remove]",
-    "dremel rotary tool": "[repeated defect. Please remove]",
+    "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the thread issue / contamination has been removed.",
     "punch tool": "[repeated defect. Please remove]",
-    "buffer pad": "[repeated defect. Please remove]",
-    "polish cloth": "[repeated defect. Please remove]",
+    "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the thread issue / contamination has been removed.",
+    "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the thread issue / contamination has been removed.",
     "hammer/chisel": "[repeated defect. Please remove]",
     "water leak rinse": "[repeated defect. Please remove]",
-    "foam brush": "[repeated defect. Please remove]",
-    "q-tips": "[repeated defect. Please remove]",
+    "foam brush": "Using the foam brush provided, apply a light to moderate pressure in small circles until the thread issue / contamination has been removed.",
+    "q-tips": "Using the Q-Tips provided, apply a light to moderate pressure in small circles until the thread issue / contamination has been removed.",
     "supplied clips": "[repeated defect. Please remove]",
-    "mating clips": "[repeated defect. Please remove]"
+    "mating clips": "[repeated defect. Please remove]",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the thread issue / contamination has been removed."
   },
   "wrong part / wrong kanban": {
     "hand": "[repeated defect. Please remove]",
@@ -945,21 +1001,22 @@
     "file": "[repeated defect. Please remove]",
     "deburring tool": "[repeated defect. Please remove]",
     "hook pick": "[repeated defect. Please remove]",
-    "microfiber towel": "[repeated defect. Please remove]",
-    "alcohol": "[repeated defect. Please remove]",
-    "alcohol wipes": "[repeated defect. Please remove]",
+    "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the wrong part / wrong kanban has been removed.",
+    "alcohol": "Using the alcohol and applicator provided, apply a light to moderate pressure in small circles until the wrong part / wrong kanban has been removed.",
+    "alcohol wipes": "Using the alcohol wipes provided, apply a light to moderate pressure in small circles until the wrong part / wrong kanban has been removed.",
     "hand tap": "[repeated defect. Please remove]",
     "impact drill": "[repeated defect. Please remove]",
-    "dremel rotary tool": "[repeated defect. Please remove]",
+    "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the wrong part / wrong kanban has been removed.",
     "punch tool": "[repeated defect. Please remove]",
-    "buffer pad": "[repeated defect. Please remove]",
-    "polish cloth": "[repeated defect. Please remove]",
+    "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the wrong part / wrong kanban has been removed.",
+    "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the wrong part / wrong kanban has been removed.",
     "hammer/chisel": "[repeated defect. Please remove]",
     "water leak rinse": "[repeated defect. Please remove]",
-    "foam brush": "[repeated defect. Please remove]",
-    "q-tips": "[repeated defect. Please remove]",
+    "foam brush": "Using the foam brush provided, apply a light to moderate pressure in small circles until the wrong part / wrong kanban has been removed.",
+    "q-tips": "Using the Q-Tips provided, apply a light to moderate pressure in small circles until the wrong part / wrong kanban has been removed.",
     "supplied clips": "[repeated defect. Please remove]",
-    "mating clips": "[repeated defect. Please remove]"
+    "mating clips": "[repeated defect. Please remove]",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the wrong part / wrong kanban has been removed."
   },
   "dirt / contamination": {
     "hand": "[repeated defect. See debris. Please remove this defect]",
@@ -969,33 +1026,36 @@
     "file": "[repeated defect. See debris. Please remove this defect]",
     "deburring tool": "[repeated defect. See debris. Please remove this defect]",
     "hook pick": "[repeated defect. See debris. Please remove this defect]",
-    "microfiber towel": "[repeated defect. See debris. Please remove this defect]",
-    "alcohol": "[repeated defect. See debris. Please remove this defect]",
-    "alcohol wipes": "[repeated defect. See debris. Please remove this defect]",
+    "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the dirt / contamination has been removed.",
+    "alcohol": "Using the alcohol and applicator provided, apply a light to moderate pressure in small circles until the dirt / contamination has been removed.",
+    "alcohol wipes": "Using the alcohol wipes provided, apply a light to moderate pressure in small circles until the dirt / contamination has been removed.",
     "hand tap": "[repeated defect. See debris. Please remove this defect]",
     "impact drill": "[repeated defect. See debris. Please remove this defect]",
-    "dremel rotary tool": "[repeated defect. See debris. Please remove this defect]",
+    "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the dirt / contamination has been removed.",
     "punch tool": "[repeated defect. See debris. Please remove this defect]",
-    "buffer pad": "[repeated defect. See debris. Please remove this defect]",
-    "polish cloth": "[repeated defect. See debris. Please remove this defect]",
+    "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the dirt / contamination has been removed.",
+    "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the dirt / contamination has been removed.",
     "hammer/chisel": "[repeated defect. See debris. Please remove this defect]",
     "water leak rinse": "[repeated defect. See debris. Please remove this defect]",
-    "foam brush": "[repeated defect. See debris. Please remove this defect]",
-    "q-tips": "[repeated defect. See debris. Please remove this defect]",
+    "foam brush": "Using the foam brush provided, apply a light to moderate pressure in small circles until the dirt / contamination has been removed.",
+    "q-tips": "Using the Q-Tips provided, apply a light to moderate pressure in small circles until the dirt / contamination has been removed.",
     "supplied clips": "[repeated defect. See debris. Please remove this defect]",
-    "mating clips": "[repeated defect. See debris. Please remove this defect]"
+    "mating clips": "[repeated defect. See debris. Please remove this defect]",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the dirt / contamination has been removed."
   },
   "rust": {
     "file": "Using your [type of removal tool], apply a light to moderate pressure to the [defect], in a back and forth motion, until it is removed from the suspect area.",
-    "microfiber towel": "Using the [rag, Cloth, or towel], apply light to moderate pressure in small circles to remove the [defect].",
-    "alcohol": "Using the [type of tool] and approved applicator to apply a light to moderate pressure in small circles to remove the [defect].",
-    "alcohol wipes": "Using the [type of tool], apply light to moderate pressure in small circles to remove the [defect].",
-    "hand tap": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the Froward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically—roughly every half to full turn—to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
-    "polish cloth": "Using the [type of removal tool], grasp the [defect] and remove it by carefullt lifting it away from the surface.",
-    "foam brush": "Using your [type of polishing or buffing tool], apply a light to moderate pressure, in small circles until the [defect] until it is removed from the suspect area."
+    "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the rust has been removed.",
+    "alcohol": "Using the alcohol and applicator provided, apply a light to moderate pressure in small circles until the rust has been removed.",
+    "alcohol wipes": "Using the alcohol wipes provided, apply a light to moderate pressure in small circles until the rust has been removed.",
+    "hand tap": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the Froward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the rust has been removed.",
+    "foam brush": "Using the foam brush provided, apply a light to moderate pressure in small circles until the rust has been removed.",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the rust has been removed."
   },
   "workability / tight": {
-    "hand": "Grasp both components firmly and gently work them back and forth to help loosen the workability, or tightness."
+    "hand": "Grasp both components firmly and gently work them back and forth to help loosen the workability, or tightness.",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the workability / tight has been removed."
   },
   "stiff operation": {
     "hand": "[repeated defect. See workability. Please remove this]",
@@ -1005,21 +1065,22 @@
     "file": "[repeated defect. See workability. Please remove this]",
     "deburring tool": "[repeated defect. See workability. Please remove this]",
     "hook pick": "[repeated defect. See workability. Please remove this]",
-    "microfiber towel": "[repeated defect. See workability. Please remove this]",
-    "alcohol": "[repeated defect. See workability. Please remove this]",
-    "alcohol wipes": "[repeated defect. See workability. Please remove this]",
+    "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the stiff operation has been removed.",
+    "alcohol": "Using the alcohol and applicator provided, apply a light to moderate pressure in small circles until the stiff operation has been removed.",
+    "alcohol wipes": "Using the alcohol wipes provided, apply a light to moderate pressure in small circles until the stiff operation has been removed.",
     "hand tap": "[repeated defect. See workability. Please remove this]",
     "impact drill": "[repeated defect. See workability. Please remove this]",
-    "dremel rotary tool": "[repeated defect. See workability. Please remove this]",
+    "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the stiff operation has been removed.",
     "punch tool": "[repeated defect. See workability. Please remove this]",
-    "buffer pad": "[repeated defect. See workability. Please remove this]",
-    "polish cloth": "[repeated defect. See workability. Please remove this]",
+    "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the stiff operation has been removed.",
+    "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the stiff operation has been removed.",
     "hammer/chisel": "[repeated defect. See workability. Please remove this]",
     "water leak rinse": "[repeated defect. See workability. Please remove this]",
-    "foam brush": "[repeated defect. See workability. Please remove this]",
-    "q-tips": "[repeated defect. See workability. Please remove this]",
+    "foam brush": "Using the foam brush provided, apply a light to moderate pressure in small circles until the stiff operation has been removed.",
+    "q-tips": "Using the Q-Tips provided, apply a light to moderate pressure in small circles until the stiff operation has been removed.",
     "supplied clips": "[repeated defect. See workability. Please remove this]",
-    "mating clips": "[repeated defect. See workability. Please remove this]"
+    "mating clips": "[repeated defect. See workability. Please remove this]",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the stiff operation has been removed."
   },
   "wrong kanban / incorrect label": {
     "hand": "[repeated defect. Please remove]",
@@ -1029,28 +1090,31 @@
     "file": "[repeated defect. Please remove]",
     "deburring tool": "[repeated defect. Please remove]",
     "hook pick": "[repeated defect. Please remove]",
-    "microfiber towel": "[repeated defect. Please remove]",
-    "alcohol": "[repeated defect. Please remove]",
-    "alcohol wipes": "[repeated defect. Please remove]",
+    "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the wrong kanban / incorrect label has been removed.",
+    "alcohol": "Using the alcohol and applicator provided, apply a light to moderate pressure in small circles until the wrong kanban / incorrect label has been removed.",
+    "alcohol wipes": "Using the alcohol wipes provided, apply a light to moderate pressure in small circles until the wrong kanban / incorrect label has been removed.",
     "hand tap": "[repeated defect. Please remove]",
     "impact drill": "[repeated defect. Please remove]",
-    "dremel rotary tool": "[repeated defect. Please remove]",
+    "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the wrong kanban / incorrect label has been removed.",
     "punch tool": "[repeated defect. Please remove]",
-    "buffer pad": "[repeated defect. Please remove]",
-    "polish cloth": "[repeated defect. Please remove]",
+    "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the wrong kanban / incorrect label has been removed.",
+    "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the wrong kanban / incorrect label has been removed.",
     "hammer/chisel": "[repeated defect. Please remove]",
     "water leak rinse": "[repeated defect. Please remove]",
-    "foam brush": "[repeated defect. Please remove]",
-    "q-tips": "[repeated defect. Please remove]",
+    "foam brush": "Using the foam brush provided, apply a light to moderate pressure in small circles until the wrong kanban / incorrect label has been removed.",
+    "q-tips": "Using the Q-Tips provided, apply a light to moderate pressure in small circles until the wrong kanban / incorrect label has been removed.",
     "supplied clips": "[repeated defect. Please remove]",
-    "mating clips": "[repeated defect. Please remove]"
+    "mating clips": "[repeated defect. Please remove]",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the wrong kanban / incorrect label has been removed."
   },
   "missing clip / not seated": {
     "hand": "Engage the clip, to make sure it is fully seated, if it is loose. Replace the clip using the approved clips provided, if the clip is missing.",
-    "mating clips": "Engage the clip, to make sure it is fully seated, if it is loose. Replace the clip using the approved clips provided, if the clip is missing."
+    "mating clips": "Engage the clip, to make sure it is fully seated, if it is loose. Replace the clip using the approved clips provided, if the clip is missing.",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the missing clip / not seated has been removed."
   },
   "missing sub-component": {
-    "hand": "Replace the missing subcomponent using the approved part that has been provided."
+    "hand": "Replace the missing subcomponent using the approved part that has been provided.",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the missing sub-component has been removed."
   },
   "rough operation": {
     "hand": "[repeated defect. See workability. Please remove this]",
@@ -1060,21 +1124,22 @@
     "file": "[repeated defect. See workability. Please remove this]",
     "deburring tool": "[repeated defect. See workability. Please remove this]",
     "hook pick": "[repeated defect. See workability. Please remove this]",
-    "microfiber towel": "[repeated defect. See workability. Please remove this]",
-    "alcohol": "[repeated defect. See workability. Please remove this]",
-    "alcohol wipes": "[repeated defect. See workability. Please remove this]",
+    "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the rough operation has been removed.",
+    "alcohol": "Using the alcohol and applicator provided, apply a light to moderate pressure in small circles until the rough operation has been removed.",
+    "alcohol wipes": "Using the alcohol wipes provided, apply a light to moderate pressure in small circles until the rough operation has been removed.",
     "hand tap": "[repeated defect. See workability. Please remove this]",
     "impact drill": "[repeated defect. See workability. Please remove this]",
-    "dremel rotary tool": "[repeated defect. See workability. Please remove this]",
+    "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the rough operation has been removed.",
     "punch tool": "[repeated defect. See workability. Please remove this]",
-    "buffer pad": "[repeated defect. See workability. Please remove this]",
-    "polish cloth": "[repeated defect. See workability. Please remove this]",
+    "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the rough operation has been removed.",
+    "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the rough operation has been removed.",
     "hammer/chisel": "[repeated defect. See workability. Please remove this]",
     "water leak rinse": "[repeated defect. See workability. Please remove this]",
-    "foam brush": "[repeated defect. See workability. Please remove this]",
-    "q-tips": "[repeated defect. See workability. Please remove this]",
+    "foam brush": "Using the foam brush provided, apply a light to moderate pressure in small circles until the rough operation has been removed.",
+    "q-tips": "Using the Q-Tips provided, apply a light to moderate pressure in small circles until the rough operation has been removed.",
     "supplied clips": "[repeated defect. See workability. Please remove this]",
-    "mating clips": "[repeated defect. See workability. Please remove this]"
+    "mating clips": "[repeated defect. See workability. Please remove this]",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the rough operation has been removed."
   },
   "excess flash": {
     "hand": "[repeated defect. See flash. Please remove]",
@@ -1084,21 +1149,22 @@
     "file": "[repeated defect. See flash. Please remove]",
     "deburring tool": "[repeated defect. See flash. Please remove]",
     "hook pick": "[repeated defect. See flash. Please remove]",
-    "microfiber towel": "[repeated defect. See flash. Please remove]",
-    "alcohol": "[repeated defect. See flash. Please remove]",
-    "alcohol wipes": "[repeated defect. See flash. Please remove]",
+    "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the excess flash has been removed.",
+    "alcohol": "Using the alcohol and applicator provided, apply a light to moderate pressure in small circles until the excess flash has been removed.",
+    "alcohol wipes": "Using the alcohol wipes provided, apply a light to moderate pressure in small circles until the excess flash has been removed.",
     "hand tap": "[repeated defect. See flash. Please remove]",
     "impact drill": "[repeated defect. See flash. Please remove]",
-    "dremel rotary tool": "[repeated defect. See flash. Please remove]",
+    "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the excess flash has been removed.",
     "punch tool": "[repeated defect. See flash. Please remove]",
-    "buffer pad": "[repeated defect. See flash. Please remove]",
-    "polish cloth": "[repeated defect. See flash. Please remove]",
+    "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the excess flash has been removed.",
+    "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the excess flash has been removed.",
     "hammer/chisel": "[repeated defect. See flash. Please remove]",
     "water leak rinse": "[repeated defect. See flash. Please remove]",
-    "foam brush": "[repeated defect. See flash. Please remove]",
-    "q-tips": "[repeated defect. See flash. Please remove]",
+    "foam brush": "Using the foam brush provided, apply a light to moderate pressure in small circles until the excess flash has been removed.",
+    "q-tips": "Using the Q-Tips provided, apply a light to moderate pressure in small circles until the excess flash has been removed.",
     "supplied clips": "[repeated defect. See flash. Please remove]",
-    "mating clips": "[repeated defect. See flash. Please remove]"
+    "mating clips": "[repeated defect. See flash. Please remove]",
+    "alcohol + rag": "Using the alcohol and rag provided, apply a light to moderate pressure in small circles until the excess flash has been removed."
   }
 };
 
@@ -1831,7 +1897,7 @@
       page34Container.appendChild(p3Title);
       page34Container.appendChild(document.querySelector('.preview').cloneNode(true));
 
-      if (state.projectTypeRework) {
+      if (state.projectTypeRework || state.projectTypeFullRework) {
         const p4Title = document.createElement('div');
         p4Title.className = 'panel-title';
         p4Title.style.marginTop = '18px';
@@ -2023,7 +2089,7 @@ NSSU_DATA_END
       wrap.style.display = 'grid';
 
       // AI button only enabled when valid condition
-      const aiAllowed = (state.projectTypeRework && state.aiEligible && !state.riSignedLock);
+      const aiAllowed = ((state.projectTypeRework || state.projectTypeFullRework) && state.aiEligible && !state.riSignedLock);
       aiBtn.disabled = !aiAllowed;
 
       // Library update always available (except when locked)
@@ -2073,7 +2139,7 @@ NSSU_DATA_END
           defect,
           defectPlural: pluralDefect,
           material: state.material,
-          tool: state.reworkTool,
+          tool: (state.reworkToolOtherSelected && state.reworkToolOther.trim()) ? state.reworkToolOther.trim() : state.reworkTool,
           style: 'NSSU rework language',
           commonTermsOnly: true,
           format: '4-step'
@@ -2139,7 +2205,8 @@ NSSU_DATA_END
         state.aiAttemptsUsed = 0;
         if (key === 'projectTypeRework' && state[key]) resetSuggestionReviewState();
         if (key === 'projectTypeInspection' && state[key]) resetSuggestionReviewState();
-        if (singleGroup && (singleGroup.includes('projectTypeInspection') || singleGroup.includes('projectTypeRework'))) resetSuggestionReviewState();
+        if (key === 'projectTypeFullRework' && state[key]) resetSuggestionReviewState();
+        if (singleGroup && (singleGroup.includes('projectTypeInspection') || singleGroup.includes('projectTypeRework') || singleGroup.includes('projectTypeFullRework'))) resetSuggestionReviewState();
         render();
       };
       return div;
@@ -2445,14 +2512,14 @@ NSSU_DATA_END
       points.push(buildPPEKeyPoint());
       if (state.areaTypePick && state.tagsOnMod) points.push('* Return to the safety zone while the mods are being set down.');
       points.push(buildDataKeyPoint());
-      if (!state.projectTypeRework) points.push('* Review Pictures and Videos prior to inspection.');
-      if (state.projectTypeRework) points.push('* Review the rework pictures and video prior to performing rework.');
+      if (!state.projectTypeRework && !state.projectTypeFullRework) points.push('* Review Pictures and Videos prior to inspection.');
+      if (state.projectTypeRework || state.projectTypeFullRework) points.push('* Review the rework pictures and video prior to performing rework.');
       return points.join('\n');
     }
 
     function getInitiationIssues() {
       const issues = [];
-      if (state.projectTypeRework) {
+      if (state.projectTypeRework || state.projectTypeFullRework) {
         const requiredReviewIds = ['rework1Box','rework2Box','rework3Box','rework4Box'];
         const missingReviews = requiredReviewIds.filter(id => !state.reviewedSuggestionBoxes[id]);
         if (missingReviews.length) {
@@ -2614,10 +2681,12 @@ NSSU_DATA_END
       const defectRow = row('Defect Description', defectWrap, true);
 
       const projectWrap = document.createElement('div');
-      projectWrap.className = 'group cols-2';
+      projectWrap.className = 'group cols-3';
+      const allProjectTypes = ['projectTypeInspection','projectTypeRework','projectTypeFullRework'];
       projectWrap.append(
-        buildCheckbox('projectTypeInspection', 'Inspection', ['projectTypeInspection','projectTypeRework']),
-        buildCheckbox('projectTypeRework', 'Rework', ['projectTypeInspection','projectTypeRework'])
+        buildCheckbox('projectTypeInspection', 'Inspection', allProjectTypes),
+        buildCheckbox('projectTypeRework', 'Rework', allProjectTypes),
+        buildCheckbox('projectTypeFullRework', '100% Rework', allProjectTypes)
       );
       const inspectionReworkRow = row('Inspection or Rework', projectWrap);
 
@@ -2656,18 +2725,17 @@ NSSU_DATA_END
       );
       const toolsNeededRow = row('Tools needed?', toolsNeededWrap, true);
 
-      const reworkRequiredWrap = document.createElement('div');
-      reworkRequiredWrap.className = 'group cols-2';
-      reworkRequiredWrap.append(
-        buildCheckbox('reworkToolsRequiredYes','Yes',['reworkToolsRequiredYes','reworkToolsRequiredNo']),
-        buildCheckbox('reworkToolsRequiredNo','No',['reworkToolsRequiredYes','reworkToolsRequiredNo'])
-      );
-      const modificationToolsRow = row('Modification Tools', reworkRequiredWrap);
-
       const page1ReworkWrap = document.createElement('div');
-      page1ReworkWrap.className = 'group';
-      page1ReworkWrap.append(buildSelect('reworkTool', reworkToolOptions));
-      const reworkToolsRow = row('Rework Tools', page1ReworkWrap);
+      page1ReworkWrap.style.cssText = 'display:flex; gap:10px; align-items:center; flex-wrap:wrap;';
+      const reworkToolSelect = buildSelect('reworkTool', reworkToolOptions);
+      reworkToolSelect.style.width = '50%';
+      reworkToolSelect.style.minWidth = '160px';
+      const reworkOtherChk = buildCheckbox('reworkToolOtherSelected', 'Other', null);
+      const reworkOtherInput = buildInput('reworkToolOther', 'Enter tool name');
+      reworkOtherInput.style.cssText = 'flex:1; min-width:120px;';
+      reworkOtherInput.id = 'reworkToolOtherInput';
+      page1ReworkWrap.append(reworkToolSelect, reworkOtherChk, reworkOtherInput);
+      const reworkToolsRow = row('Rework Tool', page1ReworkWrap);
 
       const focalTop = document.createElement('div');
       focalTop.className = 'group cols-2';
@@ -2877,12 +2945,11 @@ NSSU_DATA_END
         partKanbanRow,
         defectRow,
         inspectionReworkRow,
+        reworkToolsRow,
         areaTypeRow,
         vehicleAreaRow,
         materialLineRow,
         toolsNeededRow,
-        modificationToolsRow,
-        reworkToolsRow,
         focalRow,
         measurableRow,
         measurableDetailsRow
@@ -3240,6 +3307,8 @@ NSSU_DATA_END
     function buildReinspectionStep(defect, tool) {
       const d = normalizeText(defect);
       const t = normalizeText(tool);
+      const is100Rework = !!state.projectTypeFullRework;
+      if (is100Rework) return 'Inspect the part to verify the defect has been removed from the suspect area.';
       if (['supplied clips','mating clips'].includes(t) || d.includes('missing')) return 'Perform each step of the inspection process again to verify the suspect area is properly seated and secure.';
       if (d === 'workability - tight' || d === 'rough operation') return 'Perform each step of the inspection process again to verify the suspect area now operates smoothly and meets the standard.';
       if (d === 'wrong kanban' || d === 'wrong part') return 'Perform each step of the inspection process again to verify the correct part or label is now in place.';
@@ -3255,12 +3324,25 @@ NSSU_DATA_END
       if (d === 'workability - tight' || d === 'rough operation') return 'If the part is still very stiff after rework, Part = No Good. ' + getPrimaryReworkDocInstruction('Scrap');
       return 'If the defect remains, or if the part becomes damaged, Part = No Good. ' + getPrimaryReworkDocInstruction('Scrap');
     }
+    function buildStandardFallbackRule(defect, tool, recordMethodText) {
+      // Standard fallback for any tool with no exact library match
+      const toolLower = (tool || '').trim().toLowerCase();
+      return {
+        step1: 'Use the ' + toolLower + ' provided to rework the part, so that it matches the "Good Part Photo" in your project binder. Be sure not to apply any unnecessary pressure or force that may damage the part during this rework process.',
+        step2: 'Reinspect the part to verify if the rework was successful.',
+        step3: buildSuccessStep(defect, recordMethodText),
+        step4: buildFailureStep(defect),
+        blue: false
+      };
+    }
+
     function buildReworkRule(defect, material, tool, recordMethodText) {
       const defectPlural = defect ? defect.toLowerCase() + (defect.toLowerCase().endsWith('s') ? '' : 's') : 'defects';
       const defaultRule = manualGuideRule(defectPlural, recordMethodText);
       if (!defect || !tool) return defaultRule;
       const template = getExactAssociation(defect, tool);
-      if (!template) return defaultRule;
+      // No library match — use standard fallback for all tools (not just Other)
+      if (!template) return buildStandardFallbackRule(defect, tool, recordMethodText);
 
       let step1 = renderAssociationLanguage(template, defect, material, tool);
       step1 = applyPressureOverrides(step1, defect, material, tool);
@@ -3286,6 +3368,7 @@ NSSU_DATA_END
     }
 
     function renderPreviewOnly() {
+
       const defect = state.otherDefect && state.defectOther.trim() ? state.defectOther.trim() : state.commonDefect;
       const pluralDefect = pluralMap[defect] || (defect ? defect + (defect.toLowerCase().endsWith('s') ? '' : 's') : '__________');
       const finalFocal = state.focalUseOther && state.focalOther.trim() ? state.focalOther.trim() : (state.focalUseStandard && state.focalStandard ? state.focalStandard : '');
@@ -3294,7 +3377,7 @@ NSSU_DATA_END
       const recordMethodText = effectiveRecordMethods.map(recordMethodDisplay).join(' and ');
       const hasSeq = effectiveRecordMethods.includes('Seq');
       const mixedProjectKind = getMixedProjectKind(defect);
-      const inspectionReady = !!(defect && (state.projectTypeInspection || state.projectTypeRework || mixedProjectKind === 'mixed_kanban'));
+      const inspectionReady = !!(defect && (state.projectTypeInspection || state.projectTypeRework || state.projectTypeFullRework || mixedProjectKind === 'mixed_kanban'));
 
       if (state.manualPage3Mode) {
         renderManualPage3PreviewOnly();
@@ -3308,9 +3391,11 @@ NSSU_DATA_END
       let step4 = '4.) Define what conditions make a part "No-Good" and how to record "No-Good" parts onto the paperwork provided.';
       const page3Blue = !inspectionReady;
 
+
+
       if (inspectionReady) {
         if (mixedProjectKind) {
-          const mixedPreview = buildMixedProjectPreview(mixedProjectKind, state.projectTypeRework);
+          const mixedPreview = buildMixedProjectPreview(mixedProjectKind, state.projectTypeRework || state.projectTypeFullRework);
           summary = mixedPreview.summary;
           step1 = mixedPreview.step1;
           step2 = mixedPreview.step2;
@@ -3360,7 +3445,7 @@ NSSU_DATA_END
         step3 = state.measurableYes
           ? 'If NO ' + pluralDefect.toLowerCase() + ' are found, or if the ' + pluralDefect.toLowerCase() + ' are within the allowable standard, the Part = Good. ' + getPrimaryDocMarkInstruction('Okay')
           : 'If NO ' + pluralDefect.toLowerCase() + ' are present, the Part = Good. ' + getPrimaryDocMarkInstruction('Okay');
-        if (state.projectTypeRework) {
+        if (state.projectTypeRework || state.projectTypeFullRework) {
           step4 = 'If ' + pluralDefect.toLowerCase() + ' ARE present, the Part = No-Good. Proceed to the rework step.';
         } else {
           step4 = state.measurableYes
@@ -3370,6 +3455,15 @@ NSSU_DATA_END
         }
       }
 
+      // 100% Rework: override Page 3 after all other logic has run
+      if (state.projectTypeFullRework && defect) {
+        summary = '100% Rework Project';
+        step1 = 'This project is 100% Rework. Please proceed to the rework steps.';
+        step2 = '';
+        step3 = '';
+        step4 = '';
+      }
+
       let rw1 = '1. Define the step or steps in the rework process.';
       let rw2 = '2. Instruct the inspector to re-inspect the part, to ensure the rework was successful.';
       let rw3 = '3. Define how to record the data if the rework was successful.';
@@ -3377,7 +3471,7 @@ NSSU_DATA_END
       let reworkBlue = true;
 
       state.aiEligible = false;
-      if ((state.projectTypeRework || mixedProjectKind === 'mixed_kanban') && defect) {
+      if ((state.projectTypeRework || state.projectTypeFullRework || mixedProjectKind === 'mixed_kanban') && defect) {
         if (mixedProjectKind) {
           const mixedRework = buildMixedReworkPreview(mixedProjectKind);
           rw1 = mixedRework.step1;
@@ -3387,7 +3481,10 @@ NSSU_DATA_END
           reworkBlue = false;
           state.aiEligible = false;
         } else {
-          const reworkRule = buildReworkRule(defect, state.material, state.reworkTool, recordMethodText);
+          const effectiveTool = state.reworkToolOtherSelected && state.reworkToolOther.trim()
+            ? state.reworkToolOther.trim()
+            : state.reworkTool;
+          const reworkRule = buildReworkRule(defect, state.material, effectiveTool, recordMethodText);
           rw1 = reworkRule.step1;
           rw2 = reworkRule.step2;
           rw3 = getReworkSuccessText(reworkRule.step3, recordMethodText);
@@ -3402,17 +3499,23 @@ NSSU_DATA_END
       safeSet('step2Box', step2);
       safeSet('step3Box', step3);
       safeSet('step4Box', step4);
+      if (state.projectTypeFullRework && defect) {
+        const sb = document.getElementById('summaryBox');
+        if (sb) sb.innerHTML = '<div style="text-align:center;font-weight:bold;font-size:18px;padding:6px 0;">100% Rework Project</div>';
+        const forceBlank = (id) => { const el = document.getElementById(id); if (el) el.textContent = ''; };
+        forceBlank('step2Box'); forceBlank('step3Box'); forceBlank('step4Box');
+      }
       safeSet('rework1Box', rw1);
       safeSet('rework2Box', rw2);
       safeSet('rework3Box', rw3);
       safeSet('rework4Box', rw4);
       safeSet('keyPointsBox', buildKeyPoints());
       
-      setSuggestion('summaryBox', page3Blue);
+      setSuggestion('summaryBox', page3Blue || state.projectTypeFullRework);
       setSuggestion('step1Box', page3Blue);
-      setSuggestion('step2Box', page3Blue);
-      setSuggestion('step3Box', page3Blue);
-      setSuggestion('step4Box', page3Blue);
+      setSuggestion('step2Box', page3Blue || state.projectTypeFullRework);
+      setSuggestion('step3Box', page3Blue || state.projectTypeFullRework);
+      setSuggestion('step4Box', page3Blue || state.projectTypeFullRework);
       setSuggestion('rework1Box', reworkBlue);
       setSuggestion('rework2Box', reworkBlue);
       setSuggestion('rework3Box', reworkBlue);
