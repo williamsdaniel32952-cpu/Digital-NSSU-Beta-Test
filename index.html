@@ -1660,11 +1660,6 @@
         req.onerror = () => reject(req.error);
       });
       db.close();
-      // Add standard fallback templates
-      result.standardFallback = {
-        step1Template: 'Use the {tool} provided to rework the part, so that it matches the \"Good Part Photo\" in your project binder. Be sure not to apply any unnecessary pressure or force that may damage the part during this rework process.',
-        step2: 'Reinspect the part to verify if the rework was successful.'
-      };
       return result;
     }
 
@@ -1679,25 +1674,73 @@
       if (!window.showDirectoryPicker || !window.indexedDB) return null;
 
       let rootHandle = await getStoredHandle('nssuRoot');
-      if (rootHandle && await ensureHandlePermission(rootHandle, true)) return rootHandle;
 
-      const selectedHandle = await window.showDirectoryPicker({ mode: 'readwrite', startIn: 'documents' });
-      let builderRoot = selectedHandle;
-      if (selectedHandle.name !== 'NSSU Builder Subfolder') {
-        builderRoot = await selectedHandle.getDirectoryHandle('NSSU Builder Subfolder', { create: true });
+      // If we have a stored handle, try to use it
+      if (rootHandle) {
+        try {
+          const granted = await ensureHandlePermission(rootHandle, true);
+          if (granted) {
+            // Re-verify subfolders exist (they may have been deleted)
+            await rootHandle.getDirectoryHandle('Draft NSSUs', { create: true });
+            await rootHandle.getDirectoryHandle('Initiated NSSUs', { create: true });
+            return rootHandle;
+          }
+          // Permission denied — clear stored handle and re-prompt
+          await setStoredHandle('nssuRoot', null);
+          rootHandle = null;
+        } catch(e) {
+          // Handle may be stale or folder was deleted — clear and re-prompt
+          await setStoredHandle('nssuRoot', null);
+          rootHandle = null;
+        }
       }
 
-      await builderRoot.getDirectoryHandle('Draft NSSUs', { create: true });
-      await builderRoot.getDirectoryHandle('Initiated NSSUs', { create: true });
-      await setStoredHandle('nssuRoot', builderRoot);
-      return builderRoot;
+      // No valid handle — prompt user to select folder
+      try {
+        const selectedHandle = await window.showDirectoryPicker({ mode: 'readwrite', startIn: 'documents' });
+        let builderRoot = selectedHandle;
+        if (selectedHandle.name !== 'NSSU Builder Subfolder') {
+          builderRoot = await selectedHandle.getDirectoryHandle('NSSU Builder Subfolder', { create: true });
+        }
+        await builderRoot.getDirectoryHandle('Draft NSSUs', { create: true });
+        await builderRoot.getDirectoryHandle('Initiated NSSUs', { create: true });
+        await setStoredHandle('nssuRoot', builderRoot);
+        return builderRoot;
+      } catch(err) {
+        if (err && err.name === 'AbortError') return null; // User cancelled
+        if (err && err.name === 'NotAllowedError') {
+          // Not called from a user gesture — fall back gracefully
+          console.warn('showDirectoryPicker not called from user gesture:', err);
+          return null;
+        }
+        console.warn('Folder selection failed:', err);
+        return null;
+      }
     }
 
     async function getStatusDirectory(status) {
       const rootHandle = await getNssuRootDirectory();
       if (!rootHandle) return null;
       const folderName = status === 'draft' ? 'Draft NSSUs' : 'Initiated NSSUs';
-      return await rootHandle.getDirectoryHandle(folderName, { create: true });
+      try {
+        // Ensure the subfolder exists — creates it if missing
+        return await rootHandle.getDirectoryHandle(folderName, { create: true });
+      } catch(err) {
+        console.warn('Could not get/create subfolder:', folderName, err);
+        return null;
+      }
+    }
+
+    async function ensureSubfolders(rootHandle) {
+      // Verify both subfolders exist, create if missing
+      try {
+        await rootHandle.getDirectoryHandle('Draft NSSUs', { create: true });
+        await rootHandle.getDirectoryHandle('Initiated NSSUs', { create: true });
+        return true;
+      } catch(err) {
+        console.warn('Subfolder creation failed:', err);
+        return false;
+      }
     }
 
     let pendingOpenMode = 'initiated';
@@ -2560,7 +2603,9 @@ NSSU_DATA_END
       const folderName = status === 'draft' ? 'Draft NSSUs' : 'Initiated NSSUs';
       let folderWriteError = '';
 
-      if (window.showDirectoryPicker && window.indexedDB) {
+      // File System Access API requires HTTPS — won't work from a local zip file
+      const isSecureContext = window.isSecureContext;
+      if (window.showDirectoryPicker && window.indexedDB && isSecureContext) {
         try {
           const statusDir = await getStatusDirectory(status);
           if (statusDir && await ensureHandlePermission(statusDir, true)) {
@@ -2579,7 +2624,11 @@ NSSU_DATA_END
           console.warn('NSSU folder JSON save failed:', err);
         }
       } else {
-        folderWriteError = 'This browser did not expose folder-writing support for this page.';
+        if (!window.isSecureContext) {
+          folderWriteError = 'Folder saving requires HTTPS. Please open the app from its GitHub Pages URL, not from a local file.';
+        } else {
+          folderWriteError = 'This browser does not support folder-writing on this page.';
+        }
       }
 
       if (window.showSaveFilePicker) {
@@ -4035,7 +4084,7 @@ NSSU_DATA_END
       if (jsonSaveResult && jsonSaveResult.method === 'folder') {
         alert('Draft saved to the Draft NSSUs sub-folder.');
       } else {
-        alert('Draft saved inside the app, but the tablet did not write the JSON into the Draft NSSUs sub-folder. Save method used: ' + ((jsonSaveResult && jsonSaveResult.method) || 'unknown') + ((jsonSaveResult && jsonSaveResult.folderWriteError) ? '\n\nFolder write issue: ' + jsonSaveResult.folderWriteError : ''));
+        alert('Draft saved inside the app.\n\nThe JSON file could not be written to the folder — this usually means the folder permission expired after Chrome was restarted.\n\nTap Save Draft again and you will be prompted to re-select your NSSU folder.\n\nDetail: ' + ((jsonSaveResult && jsonSaveResult.folderWriteError) || 'Unknown'));
       }
     });
 
@@ -4153,7 +4202,7 @@ NSSU_DATA_END
       const record = saveRecord('initiated');
       const jsonSaveResult = await exportRecordToFile(record);
       if (jsonSaveResult && jsonSaveResult.method && jsonSaveResult.method !== 'folder') {
-        alert('The NSSU was saved inside the app, but the tablet did not write the JSON into the selected sub-folder.\n\nFile: ' + (jsonSaveResult.fileName || 'NSSU file') + '\nTarget folder: ' + (jsonSaveResult.folderName || 'NSSU folder') + '\nSave method used: ' + jsonSaveResult.method + (jsonSaveResult.folderWriteError ? '\n\nFolder write issue: ' + jsonSaveResult.folderWriteError : ''));
+        alert('NSSU initiated and saved inside the app.\n\nThe JSON file could not be written to the folder — this usually means the folder permission expired after Chrome was restarted.\n\nTap Initiate again or Save Draft to re-select your NSSU folder.\n\nDetail: ' + (jsonSaveResult.folderWriteError || 'Unknown'));
       }
       render();
       restorePrimarySignatures(record.primarySignatures || {});
@@ -5001,6 +5050,11 @@ NSSU_DATA_END
         }
       }
 
+      // Add standard fallback templates
+      result.standardFallback = {
+        step1Template: 'Use the {tool} provided to rework the part, so that it matches the \"Good Part Photo\" in your project binder. Be sure not to apply any unnecessary pressure or force that may damage the part during this rework process.',
+        step2: 'Reinspect the part to verify if the rework was successful.'
+      };
       return result;
     }
 
