@@ -1,76 +1,86 @@
-// sw.js — NSSU PWA Service Worker
-// Cache-first strategy: serves from cache when offline, updates in background when online.
-
-const CACHE_NAME = 'nssu-v4';
-
-// All assets the app needs to function fully offline.
-const PRECACHE_URLS = [
+// NSSU Input Portal — service worker
+// Bump CACHE_VERSION whenever you ship a new build to force clients to refresh.
+const CACHE_VERSION = 'nssu-v1.0.0';
+const SHELL_ASSETS = [
+  './',
   './index.html',
   './manifest.json',
   './icon-192.png',
-  './icon-512.png',
-  // CDN libraries — cached on first load so the app works offline afterwards.
-  'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js',
-  'https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js',
-  'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js',
-  'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js',
-  'https://cdn.jsdelivr.net/npm/@zxing/library@0.20.0/umd/index.min.js'
+  './icon-512.png'
 ];
 
-// ── Install: pre-cache everything we need ───────────────────────────────────
-self.addEventListener('install', event => {
+self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(PRECACHE_URLS);
-    }).then(() => self.skipWaiting())
-  );
-});
-
-// ── Activate: delete old caches from previous versions ──────────────────────
-self.addEventListener('activate', event => {
-  event.waitUntil(
-    caches.keys().then(keys =>
+    caches.open(CACHE_VERSION).then((cache) =>
+      // Use addAll with individual fallbacks so a missing optional asset
+      // (like icon-512.png) doesn't break installation.
       Promise.all(
-        keys
-          .filter(key => key !== CACHE_NAME)
-          .map(key => caches.delete(key))
+        SHELL_ASSETS.map((url) =>
+          cache.add(url).catch((err) => {
+            console.warn('SW: failed to cache', url, err);
+          })
+        )
       )
-    ).then(() => self.clients.claim())
+    )
+  );
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches
+      .keys()
+      .then((keys) =>
+        Promise.all(
+          keys
+            .filter((k) => k !== CACHE_VERSION)
+            .map((k) => caches.delete(k))
+        )
+      )
+      .then(() => self.clients.claim())
   );
 });
 
-// ── Fetch: cache-first, fall back to network ────────────────────────────────
-self.addEventListener('fetch', event => {
-  // Only handle GET requests; let everything else pass through.
-  if (event.request.method !== 'GET') return;
+self.addEventListener('fetch', (event) => {
+  const req = event.request;
+  if (req.method !== 'GET') return;
 
+  const url = new URL(req.url);
+  // Only handle same-origin requests; let the network handle cross-origin.
+  if (url.origin !== self.location.origin) return;
+
+  // For navigations, try network first so the user gets fresh HTML when online,
+  // and fall back to the cached shell when offline.
+  if (req.mode === 'navigate') {
+    event.respondWith(
+      fetch(req)
+        .then((res) => {
+          const copy = res.clone();
+          caches.open(CACHE_VERSION).then((c) => c.put(req, copy));
+          return res;
+        })
+        .catch(() =>
+          caches.match('./index.html').then((r) => r || caches.match(req))
+        )
+    );
+    return;
+  }
+
+  // For everything else, cache-first with a network fallback.
   event.respondWith(
-    caches.match(event.request).then(cached => {
-      if (cached) {
-        // Serve from cache immediately, then refresh cache in the background.
-        const networkUpdate = fetch(event.request)
-          .then(response => {
-            if (response && response.status === 200) {
-              caches.open(CACHE_NAME).then(cache => {
-                cache.put(event.request, response.clone());
-              });
+    caches.match(req).then(
+      (cached) =>
+        cached ||
+        fetch(req)
+          .then((res) => {
+            // Only cache successful, basic-type responses.
+            if (res && res.status === 200 && res.type === 'basic') {
+              const copy = res.clone();
+              caches.open(CACHE_VERSION).then((c) => c.put(req, copy));
             }
-            return response;
+            return res;
           })
-          .catch(() => {/* offline — silently ignore */});
-
-        return cached;
-      }
-
-      // Not in cache yet — fetch from network and cache it.
-      return fetch(event.request).then(response => {
-        if (!response || response.status !== 200 || response.type === 'error') {
-          return response;
-        }
-        const toCache = response.clone();
-        caches.open(CACHE_NAME).then(cache => cache.put(event.request, toCache));
-        return response;
-      });
-    })
+          .catch(() => cached)
+    )
   );
 });

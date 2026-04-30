@@ -44,9 +44,10 @@
     .manual-toggle input:checked + .manual-slider::after { transform:translateX(16px); background:#000; }
     .manual-toggle input:disabled + .manual-slider { opacity:.45; }
     .manual-guide { color: var(--suggestion); font-style:italic; }
-    .page-break-header { grid-column: 1 / -1; background: #e9f1fb; border-top: 3px solid var(--blue); border-bottom: 3px solid var(--blue); padding: 10px 12px; font-size: 15px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+    .page-break-header { grid-column: 1 / -1; background: var(--blue); color: #fff; border-top: 3px solid var(--blue); border-bottom: 3px solid var(--blue); padding: 10px 12px; font-size: 15px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
     .paper-grid { border-top: 2px solid #000; }
     .row { display: grid; grid-template-columns: 220px 1fr; border-bottom: 2px solid #000; min-height: 52px; }
+    .row.row-alt { background: #eef4fb; }
     .row.tall { min-height: 84px; }
     .label { border-right: 2px solid #000; padding: 8px; font-size: 14px; font-weight: 700; display: flex; align-items: center; line-height: 1.2; }
     .cell { padding: 6px; }
@@ -260,7 +261,7 @@
             <button class="btn secondary" id="openNssuBtn" type="button">Open</button>
             <button class="btn secondary" id="openDraftsBtn" type="button">Open Drafts</button>
             <button class="btn secondary" id="cloneNssuBtn" type="button">Clone</button>
-            <button class="btn secondary" id="importWiBtn" type="button">&#128196; Import from Work Instruction</button>
+            <button class="btn secondary" id="importWiBtn" type="button" style="display:none;">&#128196; Import from Work Instruction</button>
             <input id="wiFileInput" type="file" accept=".pdf" style="display:none;" />
             <button class="btn secondary" id="updateLibraryBtn" type="button">&#8635; Update Library</button>
             <button class="btn secondary" id="exportEditLogBtn" type="button">&#128196; Export Edit Report</button>
@@ -3373,6 +3374,12 @@ NSSU_DATA_END
         return wrap;
       })(), true));
 
+      // Stripe page 1 rows with alternating background
+      const allRows = grid.querySelectorAll('.row:not(.page2-fullwidth)');
+      allRows.forEach((r, i) => {
+        r.classList.toggle('row-alt', i % 2 === 1);
+      });
+
       grid.appendChild(sectionHeader('Page 2 — Safety Section'));
 
       const safetyShell = document.createElement('div');
@@ -4243,16 +4250,22 @@ NSSU_DATA_END
         // Snapshot the current suggested text when user focuses — used for edit log comparison
         if (STEP_LABELS[id]) editSnapshots[id] = el.textContent || '';
 
+        // Clear blue suggestion / manual-guide placeholder text the instant the
+        // user clicks into the box, so they can start typing on a clean slate.
+        const hadSuggestion = el.classList.contains('suggestion');
+        const hadManualGuide = el.classList.contains('manual-guide')
+          || (state.manualPage3Mode && page3ManualGuideText[id] && el.textContent === page3ManualGuideText[id]);
+        if (hadSuggestion || hadManualGuide) {
+          el.textContent = '';
+        }
+        el.classList.remove('suggestion');
+        el.classList.remove('manual-guide');
+
         if (state.manualPage3Mode && page3ManualGuideText[id]) {
-          if (el.classList.contains('manual-guide') || el.textContent === page3ManualGuideText[id]) {
-            el.textContent = '';
-          }
-          el.classList.remove('manual-guide');
           if (!state.manualPage3Touched) state.manualPage3Touched = {};
           state.manualPage3Touched[id] = true;
         }
         if (id.startsWith('rework')) markSuggestionBoxReviewed(id);
-        el.classList.remove('suggestion');
       });
       el.addEventListener('input', () => {
         if (state.manualPage3Mode && page3ManualGuideText[id]) {
@@ -5080,157 +5093,135 @@ NSSU_DATA_END
         inspectionText:'', reworkText:'', rawText: text
       };
 
-      // Normalise whitespace — PDF.js can produce uneven spacing
-      const t = text.replace(/\s+/g, ' ').trim();
-
-      // Strip out common PDF metadata noise for cleaner section extraction
-      // e.g. "Ujigami™ MES Powered by Tutelar Spiderworks 4/21/26... https://epic..."
+      // Normalise — collapse whitespace, strip PDF metadata noise
+      let t = text.replace(/\s+/g, ' ').trim();
       const clean = t
-        .replace(/Ujigami.*?Tutelar\s+Spiderworks/gi, '')
+        .replace(/Ujigami[\s\S]*?Tutelar\s+Spiderworks/gi, '')
         .replace(/https?:\/\/[^\s]+/gi, '')
         .replace(/\d{1,2}\/\d{1,2}\/\d{2,4},?\s+\d{1,2}:\d{2}\s*[AP]M/gi, '')
         .replace(/-TMMM\w+\s+Work\s+Instruction[^-]*-/gi, '')
-        .replace(/\d+\/\d+\s*$/gm, '')
         .trim();
 
       // ── Kanban ──────────────────────────────────────────────────────────────
-      // Match "Kanban: XXXX" format — prefer the explicit label over inline mentions
-      const kanbanLabelMatch = clean.match(/Kanban[:\s]+([A-Z0-9]{4})\b/i);
-      if (kanbanLabelMatch) {
-        result.kanban = kanbanLabelMatch[1].toUpperCase();
-      } else {
-        // Fall back: look for a 4-char kanban code adjacent to KANBAN_LOOKUP keys pattern
-        // e.g. "Kanban JZ6A reads" — grab first one found
-        const kanbanInBodyMatch = clean.match(/\bKanban\s+([A-Z][A-Z0-9]{3})\b/i);
-        if (kanbanInBodyMatch) result.kanban = kanbanInBodyMatch[1].toUpperCase();
-      }
+      // "Kanban: XXXX" or "KANBAN: XXXX" label format
+      let m = clean.match(/Kanban\s*[:\-]\s*([A-Z0-9]{4})\b/i);
+      if (m) result.kanban = m[1].toUpperCase();
 
       // ── Part Number ─────────────────────────────────────────────────────────
-      const partMatch = clean.match(/Part\s*#[:\s]+([A-Z0-9\-]{8,})/i);
-      if (partMatch) result.partNumber = partMatch[1].trim();
+      m = clean.match(/Part\s*#?\s*[:\-]\s*([A-Z0-9\-]{8,})/i);
+      if (m) result.partNumber = m[1].trim();
 
       // ── Part Name ───────────────────────────────────────────────────────────
-      const nameMatch = clean.match(/Performing inspecting?\s+(.+?)(?:Kanban|Part\s*#|\bFlow\b|Toyota)/i);
-      if (nameMatch) result.partName = nameMatch[1].trim().replace(/[,\s]+$/, '');
+      m = clean.match(/Performing inspecting?\s+(.+?)(?:Kanban|Part\s*#|\bFlow\b|Toyota)/i);
+      if (m) result.partName = m[1].trim().replace(/[,\s]+$/, '');
 
       // ── Document Type ───────────────────────────────────────────────────────
-      const docTypeMatch = clean.match(/\b(QPR|QIR|ERB|NONC|QE\s*Req|PC\s*Sup)\b/i);
-      if (docTypeMatch) result.docType = docTypeMatch[1].toUpperCase().replace(/\s+/g,'');
+      // Prefer match near Project ID line; also catch PC Sup / PC Supplier / PC SUP
+      m = clean.match(/Project\s+ID[^\n]{0,60}?\b(QPR|QIR|ERB|NONC|QE\s*Req|PC\s*Su(?:p|r|pplier))\b/i)
+       || clean.match(/\b(QPR|QIR|ERB|NONC|QE\s*Req|PC\s*Su(?:p|r|pplier))\b/i);
+      if (m) {
+        const raw = m[1].toUpperCase().replace(/\s+/g,'');
+        result.docType = (raw.startsWith('PCSU') || raw === 'PCSUPPLIER') ? 'PCSUP' : raw;
+      }
 
       // ── Defect ──────────────────────────────────────────────────────────────
-      // Handles: "inspecting for X", "checking parts for X", "visually inspecting parts for X"
-      // Stops before: new sentence, numbered step, section header, focal point phrase, "Inspect one"
-      const defectMatch = clean.match(/We are (?:visually\s+)?(?:inspecting(?:\s+parts?)?\s+for|checking\s+parts?\s+for)\s+(.+?)(?:\s+on\s+parts\b|\.\s+[A-Z0-9]|\s+1[.)\s]|\s+Conveyance|\s+Key\s*Points|\s+using\s+a\s+\w+\s+as\s+a\s+focal|\s+Inspect\s+one)/i);
-      if (defectMatch) result.defect = defectMatch[1].trim().replace(/[.,]+$/, '');
+      // Patterns: "inspecting for X", "checking parts for X", "sorting for X", "visually inspecting parts for X"
+      // Stop before: "on parts", new sentence (". [A-Z]"), numbered step ("1)"), section keywords
+      m = clean.match(/We are (?:visually\s+)?(?:inspecting(?:\s+parts?)?\s+for|checking\s+parts?\s+for|sorting\s+for)\s+(.+?)(?:\s+on\s+parts\b|\.\s+[A-Z0-9]|\s+1[.)]\s|\s+Conveyance|\s+Key\s*Points|\s+using\s+a\s+\w+\s+as\s+a\s+focal|\s+Inspect\s+one|\s+Hero|\s+Allow|\s+Proceed\b)/i);
+      if (m) result.defect = m[1].trim().replace(/[.,]+$/, '');
 
-      // ── Line ────────────────────────────────────────────────────────────────
-      const lineMatch = clean.match(/\b(Trim\s*[12]|Final\s*[123]|Water\s*Leak|Sales\s*Line|Engine\s*Line|Chassis|Body\s*Weld|Paint|ED|IP|Door)\b/i);
-      if (lineMatch) result.line = lineMatch[1].replace(/\s+/g,' ').trim();
+      // ── Lineside Address ────────────────────────────────────────────────────
+      // From Project ID line: "QPR G24A", "PC Sup C28A", "QPR J9A"
+      m = clean.match(/(?:QPR|QIR|ERB|NONC|PC\s*Su[rp])\s+([A-Z]\d{1,3}[A-Z]?)\b/i)
+       || clean.match(/Project\s+ID[^\n]*?([A-Z]\d{2,3}[A-Z]?)(?:\s*[-;@]|\s*$)/i);
+      if (m) result.linesideAddress = m[1].toUpperCase();
 
-      // ── Lineside address ────────────────────────────────────────────────────
-      // Column address from Project ID: "QPR G24A", "QPR C28A", "QPR K17A"
-      // Also look for standalone column references like "at K17A" or "location K17A"
-      const lsMatch = clean.match(/(?:QPR|QIR|ERB|NONC)\s+([A-Z]\d{1,3}[A-Z]?)\b/i)
-                   || clean.match(/\bat\s+([A-Z]\d{2,3}[A-Z]?)\b/i)
-                   || clean.match(/Project\s+ID[^\n]*?([A-Z]\d{2,3}[A-Z]?)(?=\s|$|-)/i);
-      if (lsMatch) result.linesideAddress = lsMatch[1].toUpperCase();
-
-      // ── Area type ───────────────────────────────────────────────────────────
+      // ── Area Type ───────────────────────────────────────────────────────────
       if (/pitch\s*\d|arrive\s+at\s+trim|convey(?:ance|or)|\bon\s+the\s+line\b/i.test(clean)) {
         result.areaType = 'Line';
       } else if (/flow\s*rack|safe\s*area\s+to\s+inspect/i.test(clean)) {
         result.areaType = 'Lineside';
-      } else if (/\btote\b/i.test(clean)) {
+      } else if (/\btote\b/i.test(clean) || /lineside/i.test(clean)) {
         result.areaType = 'Lineside';
-      } else if (/pick\s*area/i.test(clean)) {
-        result.areaType = 'Pick Area';
       }
 
-      // ── Focal point ─────────────────────────────────────────────────────────
-      const focalMatch = clean.match(/use\s+(?:a\s+)?([\w][\w\s]*?)\s+as\s+(?:a\s+|your\s+)?focal\s+point/i)
-                      || clean.match(/(flashlight|finger|gauge)\s+as\s+(?:a\s+)?focal\s+point/i);
-      if (focalMatch) {
-        const raw = (focalMatch[1] || '').toLowerCase().trim();
-        if (/flash|light/.test(raw))   result.focalPoint = 'Flashlight';
-        else if (/finger/.test(raw))   result.focalPoint = 'Finger';
-        else if (/gauge|gage/.test(raw)) result.focalPoint = 'Gauge';
+      // ── Focal Point ─────────────────────────────────────────────────────────
+      m = clean.match(/use\s+(?:a\s+)?([\w][\w\s]*?)\s+as\s+(?:a\s+|your\s+)?focal\s+point/i);
+      if (m) {
+        const raw = m[1].toLowerCase().trim();
+        if (/finger/.test(raw))           result.focalPoint = 'Finger';
+        else if (/flash|light/.test(raw)) result.focalPoint = 'Flashlight';
+        else if (/gauge|gage/.test(raw))  result.focalPoint = 'Gauge';
       }
 
-      // ── Rework tool ─────────────────────────────────────────────────────────
+      // ── Rework Tool ─────────────────────────────────────────────────────────
+      // Use regex objects — no string-to-RegExp conversion, no escaping issues
+      // Priority order matters: more specific combos first
       const toolKeywords = [
         [/white\s*gas.{0,30}white\s*pad|white\s*pad.{0,30}white\s*gas/i, 'White Gas + White Pad'],
         [/white\s*gas/i,          'White Gas'],
         [/white\s*pad/i,          'White Pad'],
+        [/replacement\s*label/i,  'Replacement Label'],
         [/alcohol\s*wipes/i,      'Alcohol Wipes'],
         [/alcohol.{0,10}rag|rag.{0,10}alcohol/i, 'Alcohol + Rag'],
         [/alcohol/i,              'Alcohol'],
         [/microfiber/i,           'Microfiber Towel'],
         [/cotton\s*cloth|dry\s*cloth/i, 'Rag'],
         [/magic\s*eraser/i,       'Magic Eraser'],
-        [/dremel/i,               'Dremel Rotary Tool'],
-        [/hand\s*tap/i,           'Hand Tap'],
-        [/drill.{0,6}tap/i,       'Drill with Tap'],
         [/deburring/i,            'Deburring Tool'],
+        [/china\s*marker/i,       'China Marker'],
+        [/hand\s*tap/i,           'Hand Tap'],
+        [/dremel/i,               'Dremel Rotary Tool'],
+        [/drill.{0,6}tap/i,       'Drill with Tap'],
         [/scissors/i,             'Scissors'],
         [/\bsnips\b/i,            'Snips'],
         [/steel\s*file/i,         'Steel File'],
-        [/round\s*file/i,         'Round File'],
         [/\bfile\b/i,             'File'],
         [/hook\s*pick/i,          'Hook Pick'],
         [/tweezers/i,             'Tweezers'],
         [/foam\s*brush/i,         'Foam Brush'],
-        [/\bpunch\b/i,            'Punch Tool'],
-        [/hammer|chisel/i,        'Hammer/Chisel'],
+        [/wire\s*brush/i,         'Wire Brush'],
         [/mating\s*clip/i,        'Mating Clips'],
         [/mating\s*bolt/i,        'Mating Bolt'],
         [/mating\s*nut/i,         'Mating Nut'],
-        [/wire\s*brush/i,         'Wire Brush'],
-        [/replacement\s*label/i,  'Replacement Label'],
-        [/china\s*marker/i,       'China Marker'],
+        [/\bpunch\b/i,            'Punch Tool'],
+        [/hammer|chisel/i,        'Hammer/Chisel'],
         [/\bhands?\b/i,           'Hand'],
       ];
 
-      // Search rework section first, then header tools list, then full text
-      const rwSect   = clean.match(/(?:Rework\s+step|rework\s+process)[\s\S]*?(?=2x2|Witness\s+Marking|Non-conform|WI\s+REVISION|Operator\s+Cert)/i);
-      const toolHdr  = clean.match(/(?:Job\s+Specific\s+Required\s+Tools[\s\S]*?)(?=CONTROLLED|ERGONOMICS|STANDARDIZED)/i);
-      const afterInsp = clean.match(/Actual\s+Part\s+Inspection[\s\S]*/i);
-      const embRw     = afterInsp && afterInsp[0].match(/(?:\d+\))\s[\s\S]*?(?:rework|Mark\s*["']?R["']?)[\s\S]*?(?=\*If|Key\s*Points|2x2)/i);
-      const searchIn  = [
-        rwSect   && rwSect[0],
-        toolHdr  && toolHdr[0],
-        embRw    && embRw[0],
-      ].filter(Boolean).join(' ') || clean;
+      // Build search area: rework section + tools header
+      // Also handle "Rework" (not "Rework step") as a section header
+      const rwSect = clean.match(/(?:Rework\s+(?:step|steps?|Part|by)\b|^Rework\b)[\s\S]*?(?=2x2|Witness\s+Mark|Reject|NON-CONFORM|WI\s+REVISION|Operator\s+Cert)/i);
+      const toolHdr = clean.match(/Job\s+Specific\s+Required\s+Tools[\s\S]*?(?=CONTROLLED|ERGONOMICS|STANDARDIZED)/i);
+      const searchIn = [rwSect && rwSect[0], toolHdr && toolHdr[0]].filter(Boolean).join(' ') || clean;
 
       for (const [rx, label] of toolKeywords) {
         if (rx.test(searchIn)) { result.reworkTool = label; break; }
       }
-      if (!result.reworkTool && afterInsp && /using\s+(?:both\s+)?hands?|by\s+hand/i.test(afterInsp[0])) {
-        result.reworkTool = 'Hand';
-      }
 
-      // ── Project type ────────────────────────────────────────────────────────
-      result.projectType = /rework\s+step|mark\s*["']?R["']?\s+for|proceed\s+to\s+rework/i.test(clean)
+      // ── Project Type ────────────────────────────────────────────────────────
+      result.projectType = /rework\s+(?:step|steps?|Part|by)\b|mark\s*["']?R["']?\s+for|proceed\s+to\s+rework/i.test(clean)
         ? 'Rework' : 'Inspection';
 
-      // ── Inspection text — word for word from "Actual Part Inspection" ───────
-      // Stop only at major section headers — do NOT stop at "refer to" or mid-sentence phrases
-      const inspRaw = clean.match(/Actual\s+Part\s+Inspection\s+([\s\S]*?)(?=\s*(?:Rework\s+step\b|2x2\s+(?:Inspection|Quality)|Witness\s+Marking|Reject\s+Step|NON-CONFORM|WI\s+REVISION))/i);
+      // ── Inspection Text ─────────────────────────────────────────────────────
+      // Grab everything from "Actual Part Inspection" to the next major section
+      const inspRaw = clean.match(/Actual\s+Part\s+Inspection\s+([\s\S]*?)(?=\s*(?:Rework\s+(?:step|steps?|Part)|^Rework\b|2x2\s+(?:Inspection|Quality|Step)|Witness\s+Marking|Reject\s+Step|NON-CONFORM|WI\s+REVISION))/i);
       if (inspRaw) {
         result.inspectionText = inspRaw[1]
-          .replace(/Key\s*Points?:?[^\n]*/gi, '')
+          .replace(/Key\s*Points?:?[\s\S]*?(?=\d+\)|$)/gi, '')
           .replace(/\s{2,}/g, ' ')
           .trim();
       }
 
-      // ── Rework text — word for word from "Rework step" ──────────────────────
-      const rwRaw = clean.match(/Rework\s+step\s*([\s\S]*?)(?=\s*(?:2x2\s+(?:Inspection|Quality|Step)|Witness\s+Marking|Reject\s+Step|NON-CONFORM|WI\s+REVISION|Key\s*Points\s*:|Operator\s+Cert))/i);
+      // ── Rework Text ─────────────────────────────────────────────────────────
+      // Handle both "Rework step" and standalone "Rework" as section headers
+      const rwRaw = clean.match(/Rework\s+(?:step|steps?|Part)\s*([\s\S]*?)(?=\s*(?:2x2\s+(?:Inspection|Quality|Step)|Witness\s+Marking|Reject\s+Step|NON-CONFORM|WI\s+REVISION|Key\s*Points\s*:|Operator\s+Cert|Certification\s+Process))/i)
+                 || clean.match(/\bRework\b\s*\n([\s\S]*?)(?=\s*(?:2x2|Witness|Reject|NON-CONFORM|Key\s*Points\s*:))/i);
       if (rwRaw) {
         result.reworkText = rwRaw[1]
+          .replace(/Key\s*Points?:?[\s\S]*?(?=\d+\)|[A-Z][a-z]|$)/g, '')
           .replace(/\s{2,}/g, ' ')
           .trim();
-      } else if (embRw) {
-        // Embedded in inspection steps
-        result.reworkText = embRw[0].replace(/\s{2,}/g,' ').trim();
       }
 
       return result;
@@ -5648,38 +5639,35 @@ NSSU_DATA_END
     }
 
     // Wire combined boxes blur/focus
-    const combinedBox = document.getElementById('combinedStepsBox');
-    if (combinedBox) {
-      combinedBox.addEventListener('blur', () => { if (state.textFieldMode) syncCombinedToSteps(); });
-      combinedBox.addEventListener('focus', () => {
-        combinedBox.classList.remove('suggestion');
-        // Clear guide text on focus just like individual boxes
-        if (state.manualPage3Mode && combinedBox.classList.contains('manual-guide')) {
-          combinedBox.textContent = '';
-          combinedBox.classList.remove('manual-guide');
-          // Mark all p3 steps as touched
-          ['step1Box','step2Box','step3Box','step4Box'].forEach(id => {
+    // Helper: clear any blue suggestion / manual-guide placeholder text the
+    // moment the user clicks into the combined box.
+    function wireCombinedBoxClearOnFocus(box, touchedIds) {
+      box.addEventListener('focus', () => {
+        const hadSuggestion = box.classList.contains('suggestion');
+        const hadManualGuide = box.classList.contains('manual-guide');
+        if (hadSuggestion || hadManualGuide) {
+          box.textContent = '';
+        }
+        box.classList.remove('suggestion');
+        box.classList.remove('manual-guide');
+        if (state.manualPage3Mode && hadManualGuide) {
+          touchedIds.forEach(id => {
             if (!state.manualPage3Touched) state.manualPage3Touched = {};
             state.manualPage3Touched[id] = true;
           });
         }
       });
     }
+
+    const combinedBox = document.getElementById('combinedStepsBox');
+    if (combinedBox) {
+      combinedBox.addEventListener('blur', () => { if (state.textFieldMode) syncCombinedToSteps(); });
+      wireCombinedBoxClearOnFocus(combinedBox, ['step1Box','step2Box','step3Box','step4Box']);
+    }
     const combinedReworkBox = document.getElementById('combinedReworkBox');
     if (combinedReworkBox) {
       combinedReworkBox.addEventListener('blur', () => { if (state.textFieldMode) syncCombinedReworkToSteps(); });
-      combinedReworkBox.addEventListener('focus', () => {
-        combinedReworkBox.classList.remove('suggestion');
-        // Clear guide text on focus just like individual boxes
-        if (state.manualPage3Mode && combinedReworkBox.classList.contains('manual-guide')) {
-          combinedReworkBox.textContent = '';
-          combinedReworkBox.classList.remove('manual-guide');
-          ['rework1Box','rework2Box','rework3Box','rework4Box'].forEach(id => {
-            if (!state.manualPage3Touched) state.manualPage3Touched = {};
-            state.manualPage3Touched[id] = true;
-          });
-        }
-      });
+      wireCombinedBoxClearOnFocus(combinedReworkBox, ['rework1Box','rework2Box','rework3Box','rework4Box']);
     }
 
     // Load any previously stored library on startup
