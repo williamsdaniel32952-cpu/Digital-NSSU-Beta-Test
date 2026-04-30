@@ -452,12 +452,30 @@
     ];
     const lineOptions = ['','Trim 1','Trim 2','Final 1','Final 2','Final 3','Water Leak','Sales Line','Engine','Chassis','Body Weld','Paint','ED'];
     const areaVehicleOptions = ['','Front','Rear','LH #1 Door','LH #2 Door','RH #1 Door','RH #2 Door','Other'];
+    const builtInBaseBehavior = {
+  "hand": "Using the fingers of your [glove type], remove the [defect] carefully.",
+  "hand pull": "Using both hands, firmly grasp the [defect] and pull it away from the suspect area carefully.",
+  "scissors": "Using the [cutting tool] provided, cut the [defect] away carefully.",
+  "snips": "Using the [cutting tool] provided, cut the [defect] away carefully.",
+  "file": "Using your [removal tool], apply light to moderate pressure to the [defect] in a back and forth motion until it is removed.",
+  "steel file": "Using your [removal tool], apply light to moderate pressure to the [defect] in a back and forth motion until it is removed.",
+  "deburring tool": "Using your deburring tool, apply light to moderate pressure to the [defect] until it is removed from the suspect area.",
+  "microfiber towel": "Using the microfiber towel, apply light to moderate pressure in small circles to remove the [defect].",
+  "alcohol wipes": "Using the alcohol wipe, apply light to moderate pressure in small circles to remove the [defect].",
+  "alcohol + rag": "Apply a small amount of alcohol to the rag and use light to moderate pressure in small circles to remove the [defect].",
+  "dremel rotary tool": "Using the dremel rotary tool, carefully apply light pressure to the [defect] until it is removed from the suspect area.",
+  "hand tap": "Using the hand tap, carefully re-tap the affected thread until the [defect] is cleared from the suspect area.",
+  "drill with tap": "Using the drill with tap attachment, carefully re-tap the affected thread until the [defect] is cleared from the suspect area.",
+  "mating clips": "Using the mating clip, press firmly into the clip seat until it is fully seated and secure.",
+  "mating bolt": "Using the mating bolt, thread it into the affected area and torque to the specified value.",
+  "mating nut": "Using the mating nut, thread it onto the affected area and torque to the specified value."
+};
+
     const materialOptions = ['','Metal','Metal/Rubber','Plastic/Fabric','Plastic','Fabric','Rubber','Foam','Glass','Painted'];
     const reworkToolOptions = [
       '',
       'Alcohol','Alcohol + Rag','Alcohol Wipes',
       'Buffer Pad',
-      'Calipers',
       'Deburring Tool','Drill with Tap','Dry Rag','Dremel Rotary Tool',
       'File','Flathead Screw Driver','Foam Brush',
       'Hand','Hand Pull','Hand Tap','Hammer/Chisel','Hook Pick',
@@ -465,7 +483,7 @@
       'Polish Cloth','Punch Tool',
       'Q-Tips',
       'Rag','Replacement Label','Round File',
-      'Scale','Scissors','Snips','Steel File',
+      'Scissors','Snips','Steel File',
       'Tweezers',
       'White Gas','White Gas + White Pad','White Pad','Wire Brush'
     ];
@@ -499,8 +517,8 @@
     const exactReworkAssociations = {
   "appearance defect": {
     "hand": "Using your hand, firmly grasp the appearance defect and lift it gently away from the surface of the suspect area.",
-    "scissors": "Using your [type of cutting tool], genlty cut away the appearance defect from the suspect area.",
-    "snips": "Using your [type of cutting tool], genlty cut away the appearance defect from the suspect area.",
+    "scissors": "Using your scissors, gently cut away the appearance defect from the suspect area.",
+    "snips": "Using your snips, gently cut away the appearance defect from the suspect area.",
     "file": "Using your file, apply a light to moderate pressure to the appearance defect until it is removed from the suspect area.",
     "steel file": "Using your file, apply a light to moderate pressure to the appearance defect, ina back and forth motion, until it is removed from the suspect area.",
     "round file": "Using around file, apply moderate pressure to the appearance defect and make a back and forth motion, until the appearance defect is removed.",
@@ -532,7 +550,7 @@
     "steel file": "Using a steel file, apply moderate pressure to the burr and make a back and forth motion, until the burr is removed.",
     "round file": "Using your round file, apply a light to moderate pressure to the burr until it is removed from the suspect area.",
     "deburring tool": "Using a Deburring Tool, apply light to moderate pressure to the defect and roll the deburring tool away from you. Repeat until the appearance defect is removed.",
-    "hook pick": "Using a round Hook Pick, apply moderate pressure to the burr and lift away from you self, until the burr is removed.",
+    "hook pick": "Using a round Hook Pick, apply moderate pressure to the burr and lift away from yourself, until the burr is removed.",
     "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the burr has been removed.",
     "rag": "Using the rag provided, apply a light to moderate pressure in small circles until the burr has been removed.",
     "dry rag": "Using the dry rag provided, apply a light to moderate pressure in small circles until the burr has been removed.",
@@ -546,7 +564,7 @@
     "white gas + white pad": "Using the white gas and white pad provided, apply a light to moderate pressure in small circles until the burr has been removed.",
     "white pad": "Using the white pad provided, apply a light to moderate pressure in small circles until the burr has been removed.",
     "hand tap": "Using a Hand Tap, apply light to moderate pressure to tap away the appearance defect.",
-    "drill with tap": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the Froward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "drill with tap": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the forward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
     "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the burr has been removed.",
     "wire brush": "Using the wire brush provided, apply a light to moderate pressure in small circles until the burr has been removed.",
     "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the burr has been removed.",
@@ -603,8 +621,6 @@
     "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the crack has been removed.",
     "punch tool": "cracks cannot be reworked",
     "hammer/chisel": "cracks cannot be reworked",
-    "calipers": "cracks cannot be reworked",
-    "scale": "cracks cannot be reworked",
     "replacement label": "cracks cannot be reworked",
     "mating clips": "cracks cannot be reworked",
     "mating bolt": "cracks cannot be reworked",
@@ -647,11 +663,11 @@
     "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the damage has been removed."
   },
   "debris": {
-    "hand": "Using the fingers of your [type of glove based on material selected], remove the debris carefully.",
-    "hand pull": "Using the fingers of your [type of glove based on material selected], grasp the debris and remove it carefully by lifting it away.",
-    "round file": "Using a [type of filing tool], apply moderate pressure to the debris and make a back and forth motion, until the debris is removed.",
-    "hook pick": "Using a [type of removal tool], apply light to moderate pressure to lift away the debris.",
-    "tweezers": "Using the [type of removal tool], grasp the debris and remove it by carefullt lifting it away from the surface.",
+    "hand": "Using the fingers of your rubber palm gloves, remove the debris carefully.",
+    "hand pull": "Using the fingers of your rubber palm gloves, grasp the debris and remove it carefully by lifting it away.",
+    "round file": "Using a round file, apply moderate pressure to the debris and make a back and forth motion, until the debris is removed.",
+    "hook pick": "Using a hook pick, apply light to moderate pressure to lift away the debris.",
+    "tweezers": "Using the tweezers, grasp the debris and remove it by carefully lifting it away from the surface.",
     "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the debris has been removed.",
     "rag": "Using the rag provided, apply a light to moderate pressure in small circles until the debris has been removed.",
     "dry rag": "Using the dry rag provided, apply a light to moderate pressure in small circles until the debris has been removed.",
@@ -665,7 +681,7 @@
     "white gas + white pad": "Using the white gas and white pad provided, apply a light to moderate pressure in small circles until the debris has been removed.",
     "white pad": "Using the white pad provided, apply a light to moderate pressure in small circles until the debris has been removed.",
     "hand tap": "Using a Hand Tap, apply light to moderate pressure in a clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
-    "drill with tap": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the Froward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "drill with tap": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the forward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
     "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the debris has been removed.",
     "wire brush": "Using the wire brush provided, apply a light to moderate pressure in small circles until the debris has been removed.",
     "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the debris has been removed.",
@@ -726,16 +742,16 @@
     "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the excess flash has been removed."
   },
   "excess material": {
-    "hand": "Using the fingers of your [type of glove based on material selected], remove the excess material carefully.",
-    "hand pull": "Using the fingers of your [type of glove based on material selected], grasp the excess material and remove it carefully by lifting it away.",
-    "scissors": "Using the [tupe of cutting tool] provided, cut the excess material away carefully.",
-    "snips": "Using your [type of cutting tool], genlty cut away the excess material from the suspect area.",
-    "file": "Using your [type of removal tool], apply a light to moderate pressure to the excess material, in a back and forth motion, until it is removed from the suspect area.",
-    "steel file": "Using your [type of removal tool], apply a light to moderate pressure to the excess material, in a back and forth motion, until it is removed from the suspect area.",
-    "round file": "Using a [type of filing tool], apply moderate pressure to the excess material and make a back and forth motion, until the excess material is removed.",
+    "hand": "Using the fingers of your rubber palm gloves, remove the excess material carefully.",
+    "hand pull": "Using the fingers of your rubber palm gloves, grasp the excess material and remove it carefully by lifting it away.",
+    "scissors": "Using the scissors provided, cut the excess material away carefully.",
+    "snips": "Using your snips, gently cut away the excess material from the suspect area.",
+    "file": "Using your file, apply a light to moderate pressure to the excess material, in a back and forth motion, until it is removed from the suspect area.",
+    "steel file": "Using your steel file, apply a light to moderate pressure to the excess material, in a back and forth motion, until it is removed from the suspect area.",
+    "round file": "Using a round file, apply moderate pressure to the excess material and make a back and forth motion, until the excess material is removed.",
     "deburring tool": "Using a Deburring Tool, apply light to moderate pressure to the excess material and roll the deburring tool away from you. Repeat until the excess material is removed.",
-    "hook pick": "Using a [type of removal tool], apply light to moderate pressure to lift away the excess material.",
-    "tweezers": "Using the [type of removal tool], grasp the excess material and remove it by carefullt lifting it away from the surface.",
+    "hook pick": "Using a hook pick, apply light to moderate pressure to lift away the excess material.",
+    "tweezers": "Using the tweezers, grasp the excess material and remove it by carefully lifting it away from the surface.",
     "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the excess material has been removed.",
     "rag": "Using the rag provided, apply a light to moderate pressure in small circles until the excess material has been removed.",
     "dry rag": "Using the dry rag provided, apply a light to moderate pressure in small circles until the excess material has been removed.",
@@ -749,7 +765,7 @@
     "white gas + white pad": "Using the white gas and white pad provided, apply a light to moderate pressure in small circles until the excess material has been removed.",
     "white pad": "Using the white pad provided, apply a light to moderate pressure in small circles until the excess material has been removed.",
     "hand tap": "Using a Hand Tap, apply light to moderate pressure in a clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
-    "drill with tap": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the Froward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "drill with tap": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the forward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
     "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the excess material has been removed.",
     "wire brush": "Using the wire brush provided, apply a light to moderate pressure in small circles until the excess material has been removed.",
     "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the excess material has been removed.",
@@ -757,13 +773,13 @@
     "hammer/chisel": "Hold the chisel in your non-dominant hand, and place it flush against the surface while applying pressure to the base of the excess material. Using your dominant hand, strike the head (butt) of the chisel with the hammer. Repeat this as needed to remove the weld splatter, but be sure not to dig the corners of the chisel into the surface, causing damage."
   },
   "flash": {
-    "hand pull": "Using the fingers of your [type of glove based on material selected], grasp the flash and remove it carefully by lifting it away.",
-    "snips": "Using your [type of cutting tool], genlty cut away the flash from the suspect area.",
-    "file": "Using your [type of removal tool], apply a light to moderate pressure to the flash, in a back and forth motion, until it is removed from the suspect area.",
-    "steel file": "Using your [type of removal tool], apply a light to moderate pressure to the flash, in a back and forth motion, until it is removed from the suspect area.",
+    "hand pull": "Using the fingers of your rubber palm gloves, grasp the flash and remove it carefully by lifting it away.",
+    "snips": "Using your snips, gently cut away the flash from the suspect area.",
+    "file": "Using your file, apply a light to moderate pressure to the flash, in a back and forth motion, until it is removed from the suspect area.",
+    "steel file": "Using your steel file, apply a light to moderate pressure to the flash, in a back and forth motion, until it is removed from the suspect area.",
     "deburring tool": "Using a Deburring Tool, apply light to moderate pressure to the flash and roll the deburring tool away from you. Repeat until the flash is removed.",
-    "hook pick": "Using a [type of removal tool], apply light to moderate pressure to lift away the flash.",
-    "tweezers": "Using the [type of removal tool], grasp the flash and remove it by carefullt lifting it away from the surface.",
+    "hook pick": "Using a hook pick, apply light to moderate pressure to lift away the flash.",
+    "tweezers": "Using the tweezers, grasp the flash and remove it by carefully lifting it away from the surface.",
     "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the flash has been removed.",
     "rag": "Using the rag provided, apply a light to moderate pressure in small circles until the flash has been removed.",
     "dry rag": "Using the dry rag provided, apply a light to moderate pressure in small circles until the flash has been removed.",
@@ -777,7 +793,7 @@
     "white gas + white pad": "Using the white gas and white pad provided, apply a light to moderate pressure in small circles until the flash has been removed.",
     "white pad": "Using the white pad provided, apply a light to moderate pressure in small circles until the flash has been removed.",
     "hand tap": "Using a Hand Tap, apply light to moderate pressure in a clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
-    "drill with tap": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the Froward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "drill with tap": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the forward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
     "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the flash has been removed.",
     "wire brush": "Using the wire brush provided, apply a light to moderate pressure in small circles until the flash has been removed.",
     "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the flash has been removed.",
@@ -785,17 +801,17 @@
     "hammer/chisel": "Hold the chisel in your non-dominant hand, and place it flush against the surface while applying pressure to the base of the flash. Using your dominant hand, strike the head (butt) of the chisel with the hammer. Repeat this as needed to remove the weld splatter, but be sure not to dig the corners of the chisel into the surface, causing damage."
   },
   "foreign material": {
-    "hand": "Using the fingers of your [type of glove based on material selected], grasp the foreign material and remove it carefully by lifting it away.",
-    "hand pull": "Using the fingers of your [type of glove based on material selected], remove the foreign material carefully.",
-    "scissors": "Using the [tupe of cutting tool] provided, cut the foreign material away carefully.",
-    "snips": "Using your [type of cutting tool], genlty cut away the foreign material from the suspect area.",
-    "file": "Using your [type of removal tool], apply a light to moderate pressure to the foreign material, in a back and forth motion, until it is removed from the suspect area.",
-    "steel file": "Using your [type of removal tool], apply a light to moderate pressure to the foreign material, in a back and forth motion, until it is removed from the suspect area.",
+    "hand": "Using the fingers of your rubber palm gloves, grasp the foreign material and remove it carefully by lifting it away.",
+    "hand pull": "Using the fingers of your rubber palm gloves, remove the foreign material carefully.",
+    "scissors": "Using the scissors provided, cut the foreign material away carefully.",
+    "snips": "Using your snips, gently cut away the foreign material from the suspect area.",
+    "file": "Using your file, apply a light to moderate pressure to the foreign material, in a back and forth motion, until it is removed from the suspect area.",
+    "steel file": "Using your steel file, apply a light to moderate pressure to the foreign material, in a back and forth motion, until it is removed from the suspect area.",
     "round file": "Using around file, apply moderate pressure to the foreign material and make a back and forth motion, until the foreign material is removed.",
     "deburring tool": "Using a Deburring Tool, apply light to moderate pressure to the foreign material and roll the deburring tool away from you. Repeat until the foreign material is removed.",
-    "hook pick": "Using a [type of removal tool], apply light to moderate pressure to lift away the foreign material.",
+    "hook pick": "Using a hook pick, apply light to moderate pressure to lift away the foreign material.",
     "tweezers": "Using a tweezers, apply light to moderate pressure to lift away the foreign material.",
-    "flathead screw driver": "Using the flathead screw driver, apply a light to moderate pressure, until the foreign material until it is removed from the suspect area.",
+    "flathead screw driver": "Using the flathead screwdriver, apply a light to moderate pressure, until the foreign material until it is removed from the suspect area.",
     "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the foreign material has been removed.",
     "rag": "Using the rag provided, apply a light to moderate pressure in small circles until the foreign material has been removed.",
     "dry rag": "Using the dry rag provided, apply a light to moderate pressure in small circles until the foreign material has been removed.",
@@ -809,7 +825,7 @@
     "white gas + white pad": "Using the white gas and white pad provided, apply a light to moderate pressure in small circles until the foreign material has been removed.",
     "white pad": "Using the white pad provided, apply a light to moderate pressure in small circles until the foreign material has been removed.",
     "hand tap": "Using a Hand Tap, apply light to moderate pressure in a clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
-    "drill with tap": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the Froward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "drill with tap": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the forward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
     "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the foreign material has been removed.",
     "wire brush": "Using the wire brush provided, apply a light to moderate pressure in small circles until the foreign material has been removed.",
     "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the foreign material has been removed.",
@@ -817,11 +833,11 @@
     "hammer/chisel": "Hold the chisel in your non-dominant hand, and place it flush against the surface while applying pressure to the base of the foreign material. Using your dominant hand, strike the head (butt) of the chisel with the hammer. Repeat this as needed to remove the weld splatter, but be sure not to dig the corners of the chisel into the surface, causing damage."
   },
   "mark": {
-    "hand": "Using the fingers of your [type of glove based on material selected], remove the mark carefully by rubbing back while applying a light to moderate pressure.",
-    "snips": "Using your [type of cutting tool], genlty cut away the mark from the suspect area.",
-    "file": "Using your [type of removal tool], apply a light to moderate pressure to the mark, in a back and forth motion, until it is removed from the suspect area.",
-    "steel file": "Using your [type of removal tool], apply a light to moderate pressure to the mark, in a back and forth motion, until it is removed from the suspect area.",
-    "hook pick": "Using a [type of removal tool], apply light to moderate pressure to lift away the mark.",
+    "hand": "Using the fingers of your rubber palm gloves, remove the mark carefully by rubbing back while applying a light to moderate pressure.",
+    "snips": "Using your snips, gently cut away the mark from the suspect area.",
+    "file": "Using your file, apply a light to moderate pressure to the mark, in a back and forth motion, until it is removed from the suspect area.",
+    "steel file": "Using your steel file, apply a light to moderate pressure to the mark, in a back and forth motion, until it is removed from the suspect area.",
+    "hook pick": "Using a hook pick, apply light to moderate pressure to lift away the mark.",
     "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the mark has been removed.",
     "rag": "Using the rag provided, apply a light to moderate pressure in small circles until the mark has been removed.",
     "dry rag": "Using the dry rag provided, apply a light to moderate pressure in small circles until the mark has been removed.",
@@ -834,7 +850,6 @@
     "white gas": "Using the white gas and applicator provided, apply a light to moderate pressure in small circles until the mark has been removed.",
     "white gas + white pad": "Using the white gas and white pad provided, apply a light to moderate pressure in small circles until the mark has been removed.",
     "white pad": "Using the white pad provided, apply a light to moderate pressure in small circles until the mark has been removed.",
-    "hand tap": "n/a [repeated step]",
     "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the mark has been removed.",
     "wire brush": "Using the wire brush provided, apply a light to moderate pressure in small circles until the mark has been removed.",
     "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the mark has been removed.",
@@ -877,13 +892,13 @@
     "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the misassembled has been removed."
   },
   "miscut": {
-    "hand pull": "Using the fingers of your [type of glove based on material selected], grasp the miscut and remove it carefully by lifting it away.",
-    "snips": "Using your [type of cutting tool], genlty cut away the miscut from the suspect area.",
-    "file": "Using your [type of removal tool], apply a light to moderate pressure to the miscut, in a back and forth motion, until it is removed from the suspect area.",
-    "steel file": "Using your [type of removal tool], apply a light to moderate pressure to the miscut, in a back and forth motion, until it is removed from the suspect area.",
+    "hand pull": "Using the fingers of your rubber palm gloves, grasp the miscut and remove it carefully by lifting it away.",
+    "snips": "Using your snips, gently cut away the miscut from the suspect area.",
+    "file": "Using your file, apply a light to moderate pressure to the miscut, in a back and forth motion, until it is removed from the suspect area.",
+    "steel file": "Using your steel file, apply a light to moderate pressure to the miscut, in a back and forth motion, until it is removed from the suspect area.",
     "deburring tool": "Using a Deburring Tool, apply light to moderate pressure to the miscut and roll the deburring tool away from you. Repeat until the miscut is removed.",
-    "hook pick": "Using a [type of removal tool], apply light to moderate pressure to lift away the miscut.",
-    "tweezers": "Using the [type of removal tool], grasp the miscut and remove it by carefullt lifting it away from the surface.",
+    "hook pick": "Using a hook pick, apply light to moderate pressure to lift away the miscut.",
+    "tweezers": "Using the tweezers, grasp the miscut and remove it by carefully lifting it away from the surface.",
     "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the miscut has been removed.",
     "rag": "Using the rag provided, apply a light to moderate pressure in small circles until the miscut has been removed.",
     "dry rag": "Using the dry rag provided, apply a light to moderate pressure in small circles until the miscut has been removed.",
@@ -979,16 +994,16 @@
     "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the misstamped has been removed."
   },
   "ng dimension": {
-    "hand": "Using the fingers of your [type of glove based on material selected], remove the ng dimension carefully.",
-    "hand pull": "Using the fingers of your [type of glove based on material selected], grasp the ng dimension and remove it carefully by lifting it away.",
-    "scissors": "Using the [tupe of cutting tool] provided, cut the ng dimension away carefully.",
-    "snips": "Using your [type of cutting tool], genlty cut away the ng dimension from the suspect area.",
-    "file": "Using your [type of removal tool], apply a light to moderate pressure to the ng dimension, in a back and forth motion, until it is removed from the suspect area.",
-    "steel file": "Using your [type of removal tool], apply a light to moderate pressure to the ng dimension, in a back and forth motion, until it is removed from the suspect area.",
-    "round file": "Using a [type of filing tool], apply moderate pressure to the ng dimension and make a back and forth motion, until the ng dimension is removed.",
+    "hand": "Using the fingers of your rubber palm gloves, remove the ng dimension carefully.",
+    "hand pull": "Using the fingers of your rubber palm gloves, grasp the ng dimension and remove it carefully by lifting it away.",
+    "scissors": "Using the scissors provided, cut the ng dimension away carefully.",
+    "snips": "Using your snips, gently cut away the ng dimension from the suspect area.",
+    "file": "Using your file, apply a light to moderate pressure to the ng dimension, in a back and forth motion, until it is removed from the suspect area.",
+    "steel file": "Using your steel file, apply a light to moderate pressure to the ng dimension, in a back and forth motion, until it is removed from the suspect area.",
+    "round file": "Using a round file, apply moderate pressure to the ng dimension and make a back and forth motion, until the ng dimension is removed.",
     "deburring tool": "Using a Deburring Tool, apply light to moderate pressure to the ng dimension and roll the deburring tool away from you. Repeat until the ng dimension is removed.",
-    "hook pick": "Using a [type of removal tool], apply light to moderate pressure to lift away the ng dimension.",
-    "tweezers": "Using the [type of removal tool], grasp the ng dimension and remove it by carefullt lifting it away from the surface.",
+    "hook pick": "Using a hook pick, apply light to moderate pressure to lift away the ng dimension.",
+    "tweezers": "Using the tweezers, grasp the ng dimension and remove it by carefully lifting it away from the surface.",
     "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the ng dimension has been removed.",
     "rag": "Using the rag provided, apply a light to moderate pressure in small circles until the ng dimension has been removed.",
     "dry rag": "Using the dry rag provided, apply a light to moderate pressure in small circles until the ng dimension has been removed.",
@@ -1009,15 +1024,15 @@
     "hammer/chisel": "Hold the chisel in your non-dominant hand, and place it flush against the surface while applying pressure to the base of the ng dimension. Using your dominant hand, strike the head (butt) of the chisel with the hammer. Repeat this as needed to remove the weld splatter, but be sure not to dig the corners of the chisel into the surface, causing damage."
   },
   "obstruction": {
-    "hand": "Using the fingers of your [type of glove based on material selected], remove the obstruction carefully.",
-    "hand pull": "Using the fingers of your [type of glove based on material selected], remove the obstruction carefully.",
-    "scissors": "Using the [tupe of cutting tool] provided, cut the obstruction away carefully.",
-    "snips": "Using your [type of cutting tool], genlty cut away the obstruction from the suspect area.",
-    "file": "Using your [type of removal tool], apply a light to moderate pressure to the obstruction, in a back and forth motion, until it is removed from the suspect area.",
-    "steel file": "Using your [type of removal tool], apply a light to moderate pressure to the obstruction, in a back and forth motion, until it is removed from the suspect area.",
+    "hand": "Using the fingers of your rubber palm gloves, remove the obstruction carefully.",
+    "hand pull": "Using the fingers of your rubber palm gloves, remove the obstruction carefully.",
+    "scissors": "Using the scissors provided, cut the obstruction away carefully.",
+    "snips": "Using your snips, gently cut away the obstruction from the suspect area.",
+    "file": "Using your file, apply a light to moderate pressure to the obstruction, in a back and forth motion, until it is removed from the suspect area.",
+    "steel file": "Using your steel file, apply a light to moderate pressure to the obstruction, in a back and forth motion, until it is removed from the suspect area.",
     "round file": "Using around file, apply moderate pressure to the obstruction and make a back and forth motion, until the obstruction is removed.",
     "deburring tool": "Using a Deburring Tool, apply light to moderate pressure to the obstruction and roll the deburring tool away from you. Repeat until the obstruction is removed.",
-    "hook pick": "Using a [type of removal tool], apply light to moderate pressure to lift away the obstruction.",
+    "hook pick": "Using a hook pick, apply light to moderate pressure to lift away the obstruction.",
     "tweezers": "Using a tweezers, apply light to moderate pressure to lift away the obstruction.",
     "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the obstruction has been removed.",
     "rag": "Using the rag provided, apply a light to moderate pressure in small circles until the obstruction has been removed.",
@@ -1032,12 +1047,12 @@
     "white gas + white pad": "Using the white gas and white pad provided, apply a light to moderate pressure in small circles until the obstruction has been removed.",
     "white pad": "Using the white pad provided, apply a light to moderate pressure in small circles until the obstruction has been removed.",
     "hand tap": "Using a Hand Tap, apply light to moderate pressure in a clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
-    "drill with tap": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the Froward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "drill with tap": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the forward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
     "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the obstruction has been removed.",
     "wire brush": "Using the wire brush provided, apply a light to moderate pressure in small circles until the obstruction has been removed.",
     "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the obstruction has been removed.",
     "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the obstruction has been removed.",
-    "punch tool": "Using your [type of polishing or buffing tool], apply a light to moderate pressure, in small circles until the obstruction until it is removed from the suspect area.",
+    "punch tool": "Using your punch tool, apply a light to moderate pressure, in small circles until the obstruction until it is removed from the suspect area.",
     "hammer/chisel": "Hold the chisel in your non-dominant hand, and place it flush against the surface while applying pressure to the base of the obstruction. Using your dominant hand, strike the head (butt) of the chisel with the hammer. Repeat this as needed to remove the weld splatter, but be sure not to dig the corners of the chisel into the surface, causing damage."
   },
   "residue": {
@@ -1078,9 +1093,9 @@
     "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the rough operation has been removed."
   },
   "rust": {
-    "file": "Using your [type of removal tool], apply a light to moderate pressure to the rust, in a back and forth motion, until it is removed from the suspect area.",
-    "steel file": "Using your [type of removal tool], apply a light to moderate pressure to the rust, in a back and forth motion, until it is removed from the suspect area.",
-    "round file": "Using a [type of filing tool], apply moderate pressure to the rust and make a back and forth motion, until the rust is removed.",
+    "file": "Using your file, apply a light to moderate pressure to the rust, in a back and forth motion, until it is removed from the suspect area.",
+    "steel file": "Using your steel file, apply a light to moderate pressure to the rust, in a back and forth motion, until it is removed from the suspect area.",
+    "round file": "Using a round file, apply moderate pressure to the rust and make a back and forth motion, until the rust is removed.",
     "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the rust has been removed.",
     "rag": "Using the rag provided, apply a light to moderate pressure in small circles until the rust has been removed.",
     "dry rag": "Using the dry rag provided, apply a light to moderate pressure in small circles until the rust has been removed.",
@@ -1148,8 +1163,6 @@
     "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the short shot has been removed.",
     "punch tool": "short shots cannot be reworked. They are a lack of material or molding defect causing deformation of the material.",
     "hammer/chisel": "short shots cannot be reworked. They are a lack of material or molding defect causing deformation of the material.",
-    "calipers": "short shots cannot be reworked. They are a lack of material or molding defect causing deformation of the material.",
-    "scale": "short shots cannot be reworked. They are a lack of material or molding defect causing deformation of the material.",
     "replacement label": "short shots cannot be reworked. They are a lack of material or molding defect causing deformation of the material.",
     "mating clips": "short shots cannot be reworked. They are a lack of material or molding defect causing deformation of the material.",
     "mating bolt": "short shots cannot be reworked. They are a lack of material or molding defect causing deformation of the material.",
@@ -1212,7 +1225,7 @@
     "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the surface marks has been removed."
   },
   "thread contamination": {
-    "hook pick": "Using a [type of removal tool], apply light to moderate pressure to lift away the thread contamination.",
+    "hook pick": "Using a hook pick, apply light to moderate pressure to lift away the thread contamination.",
     "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the thread contamination has been removed.",
     "rag": "Using the rag provided, apply a light to moderate pressure in small circles until the thread contamination has been removed.",
     "dry rag": "Using the dry rag provided, apply a light to moderate pressure in small circles until the thread contamination has been removed.",
@@ -1226,7 +1239,7 @@
     "white gas + white pad": "Using the white gas and white pad provided, apply a light to moderate pressure in small circles until the thread contamination has been removed.",
     "white pad": "Using the white pad provided, apply a light to moderate pressure in small circles until the thread contamination has been removed.",
     "hand tap": "Using a Hand Tap, apply light to moderate pressure in a clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
-    "drill with tap": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the Froward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "drill with tap": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the forward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
     "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the thread contamination has been removed.",
     "wire brush": "Using the wire brush provided, apply a light to moderate pressure in small circles until the thread contamination has been removed.",
     "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the thread contamination has been removed.",
@@ -1246,16 +1259,16 @@
     "white gas + white pad": "Using the white gas and white pad provided, apply a light to moderate pressure in small circles until the thread issue has been removed.",
     "white pad": "Using the white pad provided, apply a light to moderate pressure in small circles until the thread issue has been removed.",
     "hand tap": "Using a Hand Tap, apply light to moderate pressure in a clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
-    "drill with tap": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the Froward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "drill with tap": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the forward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
     "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the thread issue has been removed.",
     "wire brush": "Using the wire brush provided, apply a light to moderate pressure in small circles until the thread issue has been removed.",
     "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the thread issue has been removed.",
     "polish cloth": "Using the polish cloth provided, apply a light to moderate pressure in small circles until the thread issue has been removed."
   },
   "weld splatter": {
-    "file": "Using your [type of removal tool], apply a light to moderate pressure to the weld splatter, in a back and forth motion, until it is removed from the suspect area.",
-    "steel file": "Using your [type of removal tool], apply a light to moderate pressure to the weld splatter, in a back and forth motion, until it is removed from the suspect area.",
-    "round file": "Using a[type of filing tool], apply moderate pressure to the weld splatter and make a back and forth motion, until the weld splatter is removed.",
+    "file": "Using your file, apply a light to moderate pressure to the weld splatter, in a back and forth motion, until it is removed from the suspect area.",
+    "steel file": "Using your steel file, apply a light to moderate pressure to the weld splatter, in a back and forth motion, until it is removed from the suspect area.",
+    "round file": "Using around file, apply moderate pressure to the weld splatter and make a back and forth motion, until the weld splatter is removed.",
     "deburring tool": "Using a Deburring Tool, apply light to moderate pressure to the weld splatter and roll the deburring tool away from you. Repeat until the weld splatter is removed.",
     "hook pick": "n.a",
     "microfiber towel": "Using the microfiber towel provided, apply a light to moderate pressure in small circles until the weld splatter has been removed.",
@@ -1271,7 +1284,7 @@
     "white gas + white pad": "Using the white gas and white pad provided, apply a light to moderate pressure in small circles until the weld splatter has been removed.",
     "white pad": "Using the white pad provided, apply a light to moderate pressure in small circles until the weld splatter has been removed.",
     "hand tap": "Using a Hand Tap, apply light to moderate pressure in a clockwise direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
-    "drill with tap": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the Froward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
+    "drill with tap": "Using a drill with the appropriate tap, apply light pressure to the drill's trigger in the forward ( or clockwise) direction to cut threads. While turning clockwise, it is crucial to reverse the tap (turn counterclockwise) periodically\u2014roughly every half to full turn\u2014to break metal chips, prevent jamming, and avoid breaking the tap inside the hole",
     "dremel rotary tool": "Using the dremel rotary tool provided, apply a light to moderate pressure in small circles until the weld splatter has been removed.",
     "wire brush": "Using the wire brush provided, apply a light to moderate pressure in small circles until the weld splatter has been removed.",
     "buffer pad": "Using the buffer pad provided, apply a light to moderate pressure in small circles until the weld splatter has been removed.",
@@ -1479,6 +1492,7 @@
       const d = normalizeText(defect);
       if (d === 'mixed parts' || d === 'mixed part') return 'mixed_parts';
       if (d === 'mixed kanban') return 'mixed_kanban';
+      if (d === 'wrong kanban' || d === 'wrong kanban / incorrect label' || d === 'incorrect label') return 'wrong_kanban';
       return '';
     }
 
@@ -1502,6 +1516,16 @@
     }
 
     function buildMixedProjectPreview(kind, isReworkProject) {
+      // Wrong Kanban gets its own dedicated Page 3 language
+      if (kind === 'wrong_kanban') {
+        return {
+          summary: 'We are inspecting for wrong kanbans and incorrect labels.',
+          step1: getStandardProcessFlowStep1('kanbans'),
+          step2: '2.) Verify the kanban on the container matches the parts inside the container using the criteria provided.',
+          step3: '3.) If the kanban DOES match the parts in the container, the Part=Good. ' + getPrimaryDocMarkInstruction('Okay'),
+          step4: '4.) If the kanban does NOT match the parts in the container, the Part=No-Good. Proceed to the rework step.'
+        };
+      }
       const label = kind === 'mixed_kanban' ? 'mixed kanban' : 'mixed parts';
       const summary = 'We are inspecting for ' + label + '.';
       const step1 = getStandardProcessFlowStep1(label === 'mixed kanban' ? 'parts' : 'parts');
@@ -1521,6 +1545,14 @@
           step2: '2. Attempt to identify the parts using the criteria provided, and then place the correct kanban for those parts onto the container.',
           step3: '3. If the parts were able to be identified, and the correct kanban was placed onto the container, ' + getPrimaryReworkDocInstruction('Rework'),
           step4: '4. If the parts cannot be identified contact your Site Leader immediately.'
+        };
+      }
+      if (kind === 'wrong_kanban') {
+        return {
+          step1: '1. Remove the incorrect kanban from the container.',
+          step2: '2. Locate the correct kanban for the parts in the container and place it onto the container.',
+          step3: '3. If the correct kanban was located and placed onto the container, ' + getPrimaryReworkDocInstruction('Rework'),
+          step4: '4. If the correct kanban cannot be located contact your Site Leader immediately.'
         };
       }
       return {
@@ -2130,7 +2162,7 @@
       page34Container.appendChild(p3Title);
       page34Container.appendChild(document.querySelector('.preview').cloneNode(true));
 
-      if (state.projectTypeRework || state.projectTypeFullRework) {
+      if (state.projectTypeRework || state.projectTypeFullRework || ['mixed_kanban','mixed_parts','wrong_kanban'].includes(getMixedProjectKind(state.commonDefect || state.defectOther))) {
         const p4Title = document.createElement('div');
         p4Title.className = 'panel-title';
         p4Title.style.marginTop = '18px';
@@ -3520,18 +3552,23 @@ NSSU_DATA_END
       if (!template) return '';
       const defectText = (defect || 'defect').toLowerCase();
       let out = template;
-      out = out.replace(/\[(type of tool|type of filing tool|type of cutting tool|tupe of cutting tool|type of abrasive tool|type of abrasive removal tool|type of removal tool|type of debris removal tool|type of polishing or buffing tool|type of install action|type of label replacement)\]/gi, humanToolLabel(tool));
+      // Resolve tool bracket variants — all forms that mean "the tool name"
+      out = out.replace(/\[(type of tool|type of filing tool|type of cutting tool|tupe of cutting tool|type of abrasive tool|type of abrasive removal tool|type of removal tool|type of debris removal tool|type of polishing or buffing tool|type of install action|type of label replacement|cutting tool|removal tool|filing tool|abrasive tool)\]/gi, humanToolLabel(tool));
       out = out.replace(/\[(rag, Cloth, or towel|rag\. Cloth, or towel|type of rag, towel or dry cloth)\]/gi, humanToolLabel(tool));
       out = out.replace(/\[(type of chemical and\[type of applicatorl|chemical)\]/gi, humanToolLabel(tool));
-      out = out.replace(/\[type of glove based on material selected\]/gi, getGlovePhrase(material));
+      // Resolve glove bracket variants
+      out = out.replace(/\[(type of glove based on material selected|glove type|glove)\]/gi, getGlovePhrase(material));
+      // Resolve defect bracket variants
       out = out.replace(/\[(defect type|defect)\]/gi, defectText);
       out = out.replace(/appearance defect/gi, defectText);
+      // Clean up
       out = out.replace(/\s+/g, ' ').trim();
       out = out.replace(/until the [^.]*? until it is removed/gi, 'until it is removed');
-      out = out.replace(/genlty/gi, 'gently').replace(/you self/gi, 'yourself').replace(/Froward/gi, 'forward');
-      // Final guard: generated rework language should never show bracketed library placeholders.
-      out = out.replace(/\[(?:[^\]]*tool[^\]]*|tupe of cutting tool)\]/gi, humanToolLabel(tool));
+      out = out.replace(/genlty/gi, 'gently').replace(/you self/gi, 'yourself').replace(/Froward/gi, 'forward').replace(/carefullt/gi, 'carefully');
+      // Final sweep — catch any remaining tool or defect brackets
+      out = out.replace(/\[(?:[^\]]*tool[^\]]*|tupe of cutting tool|cutting tool|removal tool)\]/gi, humanToolLabel(tool));
       out = out.replace(/\[(?:defect type|defect)\]/gi, defectText);
+      out = out.replace(/\[(?:glove type|glove|type of glove[^\]]*)\]/gi, getGlovePhrase(material));
       return out;
     }
     function applyPressureOverrides(text, defect, material, tool) {
@@ -3567,18 +3604,36 @@ NSSU_DATA_END
       return 'If the defect remains, or if the part becomes damaged, Part = No Good. ' + getPrimaryReworkDocInstruction('Scrap');
     }
     function buildStandardFallbackRule(defect, tool, recordMethodText) {
-      // Standard fallback for any tool with no exact library match
-      // Check library override for custom step templates first
+      // Standard fallback for any tool with no exact defect+tool match.
+      // Priority: 1) library baseBehavior  2) built-in baseBehavior  3) generic template
       const toolLower = (tool || '').trim().toLowerCase();
+      const defectLower = (defect || '').trim().toLowerCase();
+
+      // Check for a Base_Behavior entry for this tool (defect-agnostic template)
+      const libBase = libraryOverride && libraryOverride.baseBehavior && libraryOverride.baseBehavior[toolLower];
+      const builtinBase = builtInBaseBehavior[toolLower];
+      const baseTemplate = libBase || builtinBase || null;
+
+      let step1;
+      if (baseTemplate) {
+        // Resolve bracketed placeholders in the base behavior template
+        step1 = renderAssociationLanguage(baseTemplate, defect, null, tool);
+      } else {
+        // Generic last-resort fallback
+        const libFallback = libraryOverride && libraryOverride.standardFallback;
+        const tmpl = (libFallback && libFallback.step1Template)
+          ? libFallback.step1Template
+          : 'Use the {tool} provided to rework the part, so that it matches the \"Good Part Photo\" in your project binder. Be sure not to apply any unnecessary pressure or force that may damage the part during this rework process.';
+        step1 = tmpl.replace('{tool}', toolLower).replace('{defect}', defectLower);
+      }
+
       const libFallback = libraryOverride && libraryOverride.standardFallback;
-      const step1Template = (libFallback && libFallback.step1Template)
-        ? libFallback.step1Template
-        : 'Use the {tool} provided to rework the part, so that it matches the \"Good Part Photo\" in your project binder. Be sure not to apply any unnecessary pressure or force that may damage the part during this rework process.';
       const step2Text = (libFallback && libFallback.step2)
         ? libFallback.step2
         : 'Reinspect the part to verify if the rework was successful.';
+
       return {
-        step1: step1Template.replace('{tool}', toolLower),
+        step1,
         step2: step2Text,
         step3: buildSuccessStep(defect, recordMethodText),
         step4: buildFailureStep(defect),
@@ -3627,7 +3682,7 @@ NSSU_DATA_END
       const recordMethodText = effectiveRecordMethods.map(recordMethodDisplay).join(' and ');
       const hasSeq = effectiveRecordMethods.includes('Seq');
       const mixedProjectKind = getMixedProjectKind(defect);
-      const inspectionReady = !!(defect && (state.projectTypeInspection || state.projectTypeRework || state.projectTypeFullRework || mixedProjectKind === 'mixed_kanban'));
+      const inspectionReady = !!(defect && (state.projectTypeInspection || state.projectTypeRework || state.projectTypeFullRework || mixedProjectKind === 'mixed_kanban' || mixedProjectKind === 'mixed_parts' || mixedProjectKind === 'wrong_kanban'));
 
       if (state.manualPage3Mode) {
         renderManualPage3PreviewOnly();
@@ -3721,7 +3776,7 @@ NSSU_DATA_END
       let reworkBlue = true;
 
       state.aiEligible = false;
-      if ((state.projectTypeRework || state.projectTypeFullRework || mixedProjectKind === 'mixed_kanban') && defect) {
+      if ((state.projectTypeRework || state.projectTypeFullRework || mixedProjectKind === 'mixed_kanban' || mixedProjectKind === 'mixed_parts' || mixedProjectKind === 'wrong_kanban') && defect) {
         if (mixedProjectKind) {
           const mixedRework = buildMixedReworkPreview(mixedProjectKind);
           rw1 = mixedRework.step1;
@@ -5030,7 +5085,11 @@ NSSU_DATA_END
           for (let i = 3; i < rows.length; i++) {
             const condition = String(rows[i][0] || '').trim();
             const rule      = String(rows[i][1] || '').trim();
-            if (condition && rule) target[condition] = rule;
+            if (condition && rule) {
+              // Normalize Base_Behavior keys to lowercase for consistent lookup
+              const key = sheetName === 'Base_Behavior' ? condition.toLowerCase() : condition;
+              target[key] = rule;
+            }
           }
           continue;
         }
