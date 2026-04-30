@@ -3695,8 +3695,8 @@ NSSU_DATA_END
       const defaultRule = manualGuideRule(defectPlural, recordMethodText);
       if (!defect || !tool) return defaultRule;
       const template = getExactAssociation(defect, tool);
-      // No library match — use standard fallback for all tools (not just Other)
-      if (!template) return buildStandardFallbackRule(defect, tool, recordMethodText);
+      // No confirmed defect+tool association — do not use tool base behavior or fallback instructions.
+      if (!template) return defaultRule;
 
       let step1 = renderAssociationLanguage(template, defect, material, tool);
       step1 = applyPressureOverrides(step1, defect, material, tool);
