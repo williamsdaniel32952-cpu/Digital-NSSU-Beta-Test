@@ -43,7 +43,7 @@
     .manual-toggle input:checked + .manual-slider { background:#dcdcdc; border-color:#000; }
     .manual-toggle input:checked + .manual-slider::after { transform:translateX(16px); background:#000; }
     .manual-toggle input:disabled + .manual-slider { opacity:.45; }
-    .manual-guide { color:#777; font-style:italic; }
+    .manual-guide { color: var(--suggestion); font-style:italic; }
     .page-break-header { grid-column: 1 / -1; background: #e9f1fb; border-top: 3px solid var(--blue); border-bottom: 3px solid var(--blue); padding: 10px 12px; font-size: 15px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
     .paper-grid { border-top: 2px solid #000; }
     .row { display: grid; grid-template-columns: 220px 1fr; border-bottom: 2px solid #000; min-height: 52px; }
@@ -186,6 +186,16 @@
     .lib-status.success { background:#e8f5e9; color:#1a7a3a; border:1px solid #a5d6a7; display:block; }
     .lib-status.error   { background:#fde8e8; color:#c0392b; border:1px solid #f5a5a5; display:block; }
     .lib-status.loading { background:#e8f0fb; color:#0f4c93; border:1px solid #90b4e8; display:block; }
+    .combined-field-wrap { display:none; }
+    .combined-field-wrap.active { display:block; }
+    .individual-steps-wrap { display:block; }
+    .individual-steps-wrap.hidden { display:none; }
+    #combinedStepsBox { border:2px solid #000; padding:10px; font-size:14px; line-height:1.7;
+      min-height:220px; width:100%; white-space:pre-wrap; overflow-wrap:anywhere;
+      word-break:break-word; outline:none; color:#000; box-sizing:border-box; }
+    #combinedStepsBox.suggestion { color: var(--suggestion); }
+    #combinedReworkBox.suggestion { color: var(--suggestion); }
+    #combinedStepsBox.manual-guide, #combinedReworkBox.manual-guide { color: var(--suggestion); font-style:italic; }
     .lib-success-toast { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%) scale(0.9);
       background:#1a7a3a; color:#fff; padding:18px 32px; border-radius:6px; font-size:16px;
       font-weight:700; font-family:Arial,Helvetica,sans-serif; box-shadow:0 8px 24px rgba(0,0,0,.35);
@@ -241,6 +251,7 @@
             <button class="btn secondary" id="cloneNssuBtn" type="button">Clone</button>
             <button class="btn secondary" id="updateLibraryBtn" type="button">&#8635; Update Library</button>
             <button class="btn secondary" id="exportEditLogBtn" type="button">&#128196; Export Edit Report</button>
+            <label class="manual-toggle" for="textFieldModeToggle">Text Field <input id="textFieldModeToggle" type="checkbox" role="switch" aria-label="Text field mode"><span class="manual-slider" aria-hidden="true"></span></label>
             <label class="manual-toggle" for="manualModeToggle">Manual <input id="manualModeToggle" type="checkbox" role="switch" aria-label="Manual mode"><span class="manual-slider" aria-hidden="true"></span></label>
           </div>
         </details>
@@ -270,6 +281,7 @@
             <div class="summary-box" id="summaryBox" contenteditable="true">We are inspecting for ____________.</div>
             <div style="text-align:left; margin-top:2px;"><button type="button" class="sig-clear" onclick="if(!state.riSignedLock){const _t=document.getElementById('summaryBox').textContent;document.getElementById('summaryBox').textContent='';state.summaryBox='';logEdit('summaryBox',_t,'');}">Clear</button></div>
           </div>
+          <div class="individual-steps-wrap" id="individualStepsWrap">
           <div>
             <div class="step-row"><div class="step-num">1</div><div class="step-box" id="step1Box" contenteditable="true">1.) Define where the parts are coming from and how they will be handled. This is known as a "Process Flow".</div></div>
             <div style="text-align:left; margin-top:2px; padding-left:46px;"><button type="button" class="sig-clear" onclick="if(!state.riSignedLock){const _t=document.getElementById('step1Box').textContent;document.getElementById('step1Box').textContent='';state['step1Box']='';logEdit('step1Box',_t,'');}" >Clear</button></div>
@@ -286,6 +298,13 @@
             <div class="step-row"><div class="step-num">4</div><div class="step-box" id="step4Box" contenteditable="true">4.) Define what conditions make a part "No-Good" and how to record "No-Good" parts onto the paperwork provided.</div></div>
             <div style="text-align:left; margin-top:2px; padding-left:46px;"><button type="button" class="sig-clear" onclick="if(!state.riSignedLock){const _t=document.getElementById('step4Box').textContent;document.getElementById('step4Box').textContent='';state['step4Box']='';logEdit('step4Box',_t,'');}" >Clear</button></div>
           </div>
+          </div>
+          <div class="combined-field-wrap" id="combinedFieldWrap">
+            <div id="combinedStepsBox" contenteditable="true"></div>
+            <div style="text-align:left; margin-top:4px;">
+              <button type="button" class="sig-clear" onclick="if(!state.riSignedLock){document.getElementById('combinedStepsBox').textContent='';syncCombinedToSteps();}">Clear</button>
+            </div>
+          </div>
           <div class="section-note">Key Points</div>
           <div class="step-box" id="keyPointsBox" contenteditable="true">* Review Pictures and Videos prior to inspection</div>
         </div>
@@ -293,6 +312,7 @@
         <div class="panel-title" style="margin-top:18px;">Page 4 — Rework Steps Preview</div>
         <div class="preview">
           <div class="section-note" id="reworkNotice">When Rework or 100% Rework is selected, blue text indicates an autofill suggestion that must be manually reviewed. Click into each blue field to confirm or replace the wording. Once clicked, the text turns black.</div>
+          <div class="individual-steps-wrap" id="individualReworkWrap">
           <div>
             <div class="step-row"><div class="step-num">1</div><div class="step-box suggestion" id="rework1Box" contenteditable="true">1. Define the step or steps in the rework process.</div></div>
             <div style="text-align:left; margin-top:2px; padding-left:46px;"><button type="button" class="sig-clear" onclick="if(!state.riSignedLock){const _t=document.getElementById('rework1Box').textContent;document.getElementById('rework1Box').textContent='';state['rework1Box']='';logEdit('rework1Box',_t,'');}" >Clear</button></div>
@@ -308,6 +328,13 @@
           <div>
             <div class="step-row"><div class="step-num">4</div><div class="step-box suggestion" id="rework4Box" contenteditable="true">4. Define how to record the data if the part cannot be reworked or becomes damaged.</div></div>
             <div style="text-align:left; margin-top:2px; padding-left:46px;"><button type="button" class="sig-clear" onclick="if(!state.riSignedLock){const _t=document.getElementById('rework4Box').textContent;document.getElementById('rework4Box').textContent='';state['rework4Box']='';logEdit('rework4Box',_t,'');}" >Clear</button></div>
+          </div>
+          </div>
+          <div class="combined-field-wrap" id="combinedReworkWrap">
+            <div id="combinedReworkBox" contenteditable="true" style="border:2px solid #000; padding:10px; font-size:14px; line-height:1.7; min-height:180px; width:100%; white-space:pre-wrap; overflow-wrap:anywhere; word-break:break-word; outline:none; box-sizing:border-box;"></div>
+            <div style="text-align:left; margin-top:4px;">
+              <button type="button" class="sig-clear" onclick="if(!state.riSignedLock){document.getElementById('combinedReworkBox').textContent='';syncCombinedReworkToSteps();}">Clear</button>
+            </div>
           </div>
           <div id="aiSuggestWrap" class="ai-suggest-wrap">
             <button class="btn secondary" id="aiSuggestBtn" type="button" style="display:none;">Request AI Suggestion (Optional)</button>
@@ -413,7 +440,7 @@
       goodNoGoodYes: false, goodNoGoodNo: false, examplesLocated: '',
       kanbanEntries: [{ partNumber: '', kanban: '', fileName: '' }],
       commonDefect: '', defectOther: '', otherDefect: false,
-      projectTypeInspection: false, projectTypeRework: false, projectTypeFullRework: false,
+      projectTypeInspection: false, projectTypeRework: false, projectTypeFullRework: false, textFieldMode: false,
       material: '', line: '', areaVehicle: '', interiorSelection: '',
       areaTypeLine: false, areaTypeLineside: false, areaTypePick: false, areaTypeArea: false,
       focalStandard: '', focalUseStandard: false, focalUseOther: false, focalOther: '',
@@ -1618,6 +1645,7 @@
       state.manualPage3Touched = {};
       page3ManualIds.forEach(setManualPage3Guide);
       refreshManualPage3Button();
+      if (state.textFieldMode) updateCombinedField();
     }
 
     function exitManualPage3Mode() {
@@ -1628,6 +1656,7 @@
       });
       refreshManualPage3Button();
       renderPreviewOnly();
+      if (state.textFieldMode) updateCombinedField();
     }
 
     function renderManualPage3PreviewOnly() {
@@ -3824,6 +3853,8 @@ NSSU_DATA_END
       setSuggestion('rework2Box', reworkBlue);
       setSuggestion('rework3Box', reworkBlue);
       setSuggestion('rework4Box', reworkBlue);
+      // Refresh combined fields if active
+      if (state.textFieldMode) updateCombinedField();
       setSuggestion('keyPointsBox', false);
       updateAISuggestVisibility();
     }
@@ -5134,6 +5165,134 @@ NSSU_DATA_END
       );
       showLibrarySuccessToast();
       render();
+    }
+
+    // ── Text Field Mode ──────────────────────────────────────────────────────
+    function buildCombinedText(ids) {
+      return ids.map(id => (document.getElementById(id) || {}).textContent || '')
+                .filter(s => s.trim())
+                .join('\n\n');
+    }
+
+    function syncCombinedBoxToIds(boxId, ids) {
+      const combined = document.getElementById(boxId);
+      if (!combined) return;
+      const parts = (combined.textContent || '').split(/\n{2,}/);
+      ids.forEach((id, i) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const val = (parts[i] || '').trim();
+        const prev = el.textContent;
+        if (val !== prev) { logEdit(id, prev, val); el.textContent = val; state[id] = val; }
+      });
+    }
+
+    function updateCombinedField() {
+      const isActive = state.textFieldMode;
+
+      // Page 3
+      const indiv3 = document.getElementById('individualStepsWrap');
+      const wrap3  = document.getElementById('combinedFieldWrap');
+      const box3   = document.getElementById('combinedStepsBox');
+      if (indiv3 && wrap3 && box3) {
+        indiv3.classList.toggle('hidden', isActive);
+        wrap3.classList.toggle('active', isActive);
+        if (isActive) {
+          const p3ids = ['step1Box','step2Box','step3Box','step4Box'];
+          if (state.manualPage3Mode) {
+            // Show manual guide text in combined field
+            const guideLines = p3ids.map(id => page3ManualGuideText[id] || '').filter(Boolean);
+            box3.textContent = guideLines.join('\n\n');
+            box3.classList.add('manual-guide');
+            box3.classList.remove('suggestion');
+          } else {
+            box3.textContent = buildCombinedText(p3ids);
+            const anyBlue = p3ids.some(id => { const el = document.getElementById(id); return el && el.classList.contains('suggestion'); });
+            box3.classList.toggle('suggestion', anyBlue);
+            box3.classList.remove('manual-guide');
+          }
+        }
+      }
+
+      // Page 4
+      const indiv4 = document.getElementById('individualReworkWrap');
+      const wrap4  = document.getElementById('combinedReworkWrap');
+      const box4   = document.getElementById('combinedReworkBox');
+      if (indiv4 && wrap4 && box4) {
+        indiv4.classList.toggle('hidden', isActive);
+        wrap4.classList.toggle('active', isActive);
+        if (isActive) {
+          const p4ids = ['rework1Box','rework2Box','rework3Box','rework4Box'];
+          if (state.manualPage3Mode) {
+            const guideLines = p4ids.map(id => page3ManualGuideText[id] || '').filter(Boolean);
+            box4.textContent = guideLines.join('\n\n');
+            box4.classList.add('manual-guide');
+            box4.classList.remove('suggestion');
+          } else {
+            box4.textContent = buildCombinedText(p4ids);
+            const anyBlue4 = p4ids.some(id => { const el = document.getElementById(id); return el && el.classList.contains('suggestion'); });
+            box4.classList.toggle('suggestion', anyBlue4);
+            box4.classList.remove('manual-guide');
+          }
+        }
+      }
+    }
+
+    function syncCombinedToSteps() {
+      syncCombinedBoxToIds('combinedStepsBox', ['step1Box','step2Box','step3Box','step4Box']);
+    }
+
+    function syncCombinedReworkToSteps() {
+      syncCombinedBoxToIds('combinedReworkBox', ['rework1Box','rework2Box','rework3Box','rework4Box']);
+    }
+
+    // Wire combined field blur to sync back
+    document.addEventListener('DOMContentLoaded', () => {});
+    // Wired after DOM ready below
+
+    const textFieldToggle = document.getElementById('textFieldModeToggle');
+    if (textFieldToggle) {
+      textFieldToggle.addEventListener('change', () => {
+        // Sync back to individual before switching off
+        if (!textFieldToggle.checked && state.textFieldMode) syncCombinedToSteps();
+        state.textFieldMode = textFieldToggle.checked;
+        updateCombinedField();
+      });
+    }
+
+    // Wire combined boxes blur/focus
+    const combinedBox = document.getElementById('combinedStepsBox');
+    if (combinedBox) {
+      combinedBox.addEventListener('blur', () => { if (state.textFieldMode) syncCombinedToSteps(); });
+      combinedBox.addEventListener('focus', () => {
+        combinedBox.classList.remove('suggestion');
+        // Clear guide text on focus just like individual boxes
+        if (state.manualPage3Mode && combinedBox.classList.contains('manual-guide')) {
+          combinedBox.textContent = '';
+          combinedBox.classList.remove('manual-guide');
+          // Mark all p3 steps as touched
+          ['step1Box','step2Box','step3Box','step4Box'].forEach(id => {
+            if (!state.manualPage3Touched) state.manualPage3Touched = {};
+            state.manualPage3Touched[id] = true;
+          });
+        }
+      });
+    }
+    const combinedReworkBox = document.getElementById('combinedReworkBox');
+    if (combinedReworkBox) {
+      combinedReworkBox.addEventListener('blur', () => { if (state.textFieldMode) syncCombinedReworkToSteps(); });
+      combinedReworkBox.addEventListener('focus', () => {
+        combinedReworkBox.classList.remove('suggestion');
+        // Clear guide text on focus just like individual boxes
+        if (state.manualPage3Mode && combinedReworkBox.classList.contains('manual-guide')) {
+          combinedReworkBox.textContent = '';
+          combinedReworkBox.classList.remove('manual-guide');
+          ['rework1Box','rework2Box','rework3Box','rework4Box'].forEach(id => {
+            if (!state.manualPage3Touched) state.manualPage3Touched = {};
+            state.manualPage3Touched[id] = true;
+          });
+        }
+      });
     }
 
     // Load any previously stored library on startup
