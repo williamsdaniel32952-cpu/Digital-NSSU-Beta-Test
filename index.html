@@ -1422,6 +1422,13 @@
       maxAttempts: 2
     };
 
+    // Feature flag: when false, unknown defect/tool combinations return the
+    // blue manual-guide steps instead of the constructed fallback prose.
+    // The fallback code path (buildStandardFallbackRule, builtInBaseBehavior,
+    // libraryOverride.standardFallback, libraryOverride.baseBehavior) is left
+    // intact and can be re-enabled by flipping this flag to true.
+    const STANDARD_FALLBACK_ENABLED = false;
+
     function articleFor(word) {
       const t = (word || '').trim().toLowerCase();
       if (!t) return 'a';
@@ -3695,8 +3702,15 @@ NSSU_DATA_END
       const defaultRule = manualGuideRule(defectPlural, recordMethodText);
       if (!defect || !tool) return defaultRule;
       const template = getExactAssociation(defect, tool);
-      // No confirmed defect+tool association — do not use tool base behavior or fallback instructions.
-      if (!template) return defaultRule;
+      // No library match. The constructed fallback (buildStandardFallbackRule)
+      // is currently disabled by the STANDARD_FALLBACK_ENABLED flag — when off,
+      // we return the blue manual-guide steps so the user fills them in by
+      // hand rather than seeing generic auto-generated language.
+      if (!template) {
+        return STANDARD_FALLBACK_ENABLED
+          ? buildStandardFallbackRule(defect, tool, recordMethodText)
+          : defaultRule;
+      }
 
       let step1 = renderAssociationLanguage(template, defect, material, tool);
       step1 = applyPressureOverrides(step1, defect, material, tool);
@@ -5429,6 +5443,24 @@ NSSU_DATA_END
         const stored = localStorage.getItem(LIBRARY_STORAGE_KEY);
         if (stored) {
           libraryOverride = JSON.parse(stored);
+          // If the fallback path is disabled, scrub any cached fallback data so a
+          // library that was loaded under an older build cannot deliver fallback
+          // prose. We persist the cleaned object back to storage so the cleanup
+          // is one-and-done per device.
+          if (!STANDARD_FALLBACK_ENABLED && libraryOverride) {
+            let mutated = false;
+            if ('standardFallback' in libraryOverride) {
+              delete libraryOverride.standardFallback;
+              mutated = true;
+            }
+            if (libraryOverride.baseBehavior && Object.keys(libraryOverride.baseBehavior).length) {
+              libraryOverride.baseBehavior = {};
+              mutated = true;
+            }
+            if (mutated) {
+              try { localStorage.setItem(LIBRARY_STORAGE_KEY, JSON.stringify(libraryOverride)); } catch (_) {}
+            }
+          }
           console.log('Library override loaded from storage:', Object.keys(libraryOverride.reworkAssociations || {}).length, 'defects');
         }
       } catch(e) { libraryOverride = null; }
@@ -5517,11 +5549,16 @@ NSSU_DATA_END
         }
       }
 
-      // Add standard fallback templates
-      result.standardFallback = {
-        step1Template: 'Use the {tool} provided to rework the part, so that it matches the \"Good Part Photo\" in your project binder. Be sure not to apply any unnecessary pressure or force that may damage the part during this rework process.',
-        step2: 'Reinspect the part to verify if the rework was successful.'
-      };
+      // Add standard fallback templates — only when the fallback path is enabled.
+      // When STANDARD_FALLBACK_ENABLED is false, the parser does not even populate
+      // these into the loaded library object, so nothing in the in-memory library
+      // contains fallback prose. Templates are preserved in source for re-enabling.
+      if (STANDARD_FALLBACK_ENABLED) {
+        result.standardFallback = {
+          step1Template: 'Use the {tool} provided to rework the part, so that it matches the \"Good Part Photo\" in your project binder. Be sure not to apply any unnecessary pressure or force that may damage the part during this rework process.',
+          step2: 'Reinspect the part to verify if the rework was successful.'
+        };
+      }
       return result;
     }
 
