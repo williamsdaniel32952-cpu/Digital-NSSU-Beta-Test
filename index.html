@@ -11,7 +11,19 @@
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js').catch(err => {
+        navigator.serviceWorker.register('./sw.js').then(reg => {
+          // When a new service worker takes control of the page, reload once
+          // so the user immediately sees the freshly fetched HTML/JS instead
+          // of waiting for a second visit.
+          let refreshed = false;
+          navigator.serviceWorker.addEventListener('controllerchange', () => {
+            if (refreshed) return;
+            refreshed = true;
+            window.location.reload();
+          });
+          // Probe for updates on every load (bypasses default 24-hour SW update interval).
+          if (reg && reg.update) { try { reg.update(); } catch (_) {} }
+        }).catch(err => {
           console.warn('Service worker registration failed:', err);
         });
       });
@@ -381,6 +393,7 @@
       <button class="btn" id="initiateBtn" type="button">Initiate NSSU</button>
       <button class="btn ghost" id="revisionBtn" type="button">Create Revision</button>
     </div>
+    <div id="buildStamp" style="text-align:center; font-size:11px; color:#888; padding:4px 0 12px; user-select:text;">Build v1.2.0</div>
   </div>
 
   <div id="confirmModal" class="modal">
@@ -5436,10 +5449,25 @@ NSSU_DATA_END
     // localStorage as 'nssuLibraryOverride'. App checks this before built-in rules.
 
     const LIBRARY_STORAGE_KEY = 'nssuLibraryOverride';
+    const LIBRARY_SCHEMA_KEY = 'nssuLibrarySchemaVersion';
+    // Bump LIBRARY_SCHEMA_REQUIRED whenever a fix needs to wipe every device's
+    // cached library (e.g., a rule change that obsoletes prior loaded data).
+    // Devices with a lower stored value have their cached library deleted on
+    // load and must re-import the latest .xlsx via the menu.
+    const LIBRARY_SCHEMA_REQUIRED = 2;
     let libraryOverride = null;
 
     function loadLibraryOverride() {
       try {
+        // Force-clean migration: wipe stale library caches from prior builds.
+        const storedSchema = parseInt(localStorage.getItem(LIBRARY_SCHEMA_KEY) || '0', 10);
+        if (storedSchema < LIBRARY_SCHEMA_REQUIRED) {
+          localStorage.removeItem(LIBRARY_STORAGE_KEY);
+          localStorage.setItem(LIBRARY_SCHEMA_KEY, String(LIBRARY_SCHEMA_REQUIRED));
+          libraryOverride = null;
+          console.log('Library cache cleared by schema migration to v' + LIBRARY_SCHEMA_REQUIRED);
+          return;
+        }
         const stored = localStorage.getItem(LIBRARY_STORAGE_KEY);
         if (stored) {
           libraryOverride = JSON.parse(stored);

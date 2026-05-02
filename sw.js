@@ -1,6 +1,6 @@
 // NSSU Input Portal — service worker
 // Bump CACHE_VERSION whenever you ship a new build to force clients to refresh.
-const CACHE_VERSION = 'nssu-v1.1.1';
+const CACHE_VERSION = 'nssu-v1.2.0';
 const SHELL_ASSETS = [
   './',
   './index.html',
